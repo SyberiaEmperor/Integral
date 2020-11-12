@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:integral/UI/dish_screen/dish_screen.dart';
 import 'package:integral/UI/main_page/main_page.dart';
+import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 void main() {

@@ -19,7 +19,7 @@ class Categories extends StatelessWidget {
               SizedBox(width: ResponsiveSize.width(84)),
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: categories.length,
+          itemCount: categories.length + 1,
           itemBuilder: (context, index) {
             return Container(
               height: ResponsiveSize.height(47),
