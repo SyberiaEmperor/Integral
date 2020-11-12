@@ -19,7 +19,7 @@ class Dish {
       @required this.price})
       : _categories = categories;
 
-  static testDish() {
+  static Dish testDish() {
     return Dish(
       categories: {
         Category.starter,
