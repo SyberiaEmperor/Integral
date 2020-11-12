@@ -17,18 +17,27 @@ class MainPage extends StatelessWidget {
             Expanded(
               child: CustomScrollView(
                 slivers: [
-                  SliverAppBar(
-                    backgroundColor: Theme.of(context).canvasColor,
-                    expandedHeight: 150,
-                    flexibleSpace: FlexibleSpaceBar(
-                      background: Column(
-                        children: [
-                          MarketTitle(),
-                          Search(),
-                          Categories(),
-                        ],
-                      ),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        MarketTitle(),
+                      ],
                     ),
+                  ),
+                  SliverAppBar(
+                    stretch: true,
+                    collapsedHeight: 95,
+                    expandedHeight: 95,
+                    backgroundColor: Theme.of(context).canvasColor,
+                    flexibleSpace: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Search(),
+                        Categories(),
+                      ],
+                    ),
+                    pinned: true,
+                    centerTitle: true,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(buildItems(10)),

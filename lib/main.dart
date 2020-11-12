@@ -12,9 +12,27 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Integral',
       theme: ThemeData(
-          primaryColor: Color(0xffF5F7FA),
-          backgroundColor: Color(0xffF5F7FA),
-          accentColor: Color(0xffFA7022),
+        primaryColor: Color(0xffF5F7FA),
+        backgroundColor: Color(0xffF5F7FA),
+        accentColor: Color(0xffFA7022),
+        primaryTextTheme: TextTheme(
+          bodyText1: TextStyle(
+            fontFamily: 'Poppins',
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w500,
+            fontSize: 18.0,
+          ),
+        ),
+        accentTextTheme: TextTheme(
+          bodyText1: TextStyle(
+            fontFamily: 'Poppins',
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.normal,
+            fontSize: 13.0,
+            color: Color(0xff667C8A),
+          ),
+        ),
+      ),
       home: MainPage(),
     );
   }

@@ -4,36 +4,39 @@ import 'package:flutter/material.dart';
 class MarketTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 17),
-      child: Container(
-        width: 345,
-        height: 50,
-        child: Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColor,
-              radius: 25,
-            ),
-            SizedBox(
-              width: 7,
-            ),
-            Column(
-              children: [
-                Container(
-                  width: 189,
-                  height: 20,
-                  child: Text(
-                    "Общественное питание",
-                    style: TextStyle(
-                        fontFamily:
-                            Theme.of(context).textTheme.bodyText1.fontFamily),
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.only(left: 15, bottom: 37),
+      child: Row(
+        children: [
+          CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor,
+            radius: 25,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 189,
+                height: 20,
+                child: Text(
+                  "Общественное питание",
+                  style: Theme.of(context).accentTextTheme.bodyText1,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: 112,
+                height: 20,
+                child: Text(
+                  "Интеграл",
+                  style: Theme.of(context).primaryTextTheme.bodyText1,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

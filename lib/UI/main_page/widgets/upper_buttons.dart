@@ -5,7 +5,7 @@ class UpperButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 100,
-      height: 100,
+      height: 50,
       child: Text("UpperButtons"),
     );
   }
