@@ -4,6 +4,7 @@ import 'package:integral/UI/main_page/widgets/categories.dart';
 import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
+import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -25,15 +26,18 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   SliverAppBar(
+                    elevation: 0.0,
                     stretch: true,
-                    collapsedHeight: 95,
-                    expandedHeight: 95,
-                    backgroundColor: Theme.of(context).canvasColor,
+                    collapsedHeight: ResponsiveSize.height(115),
+                    expandedHeight: ResponsiveSize.height(115),
+                    backgroundColor: Theme.of(context).backgroundColor,
                     flexibleSpace: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Search(),
+                        SizedBox(height: ResponsiveSize.height(24)),
                         Categories(),
+                        SizedBox(height: ResponsiveSize.height(26)),
                       ],
                     ),
                     pinned: true,

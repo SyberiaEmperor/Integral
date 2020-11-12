@@ -62,7 +62,7 @@ enum Category {
   sauce,
 }
 
-extension on Category {
+extension str on Category {
   String get asString {
     switch (this) {
       case Category.starter:
