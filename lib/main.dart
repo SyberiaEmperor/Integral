@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/main_page/main_page.dart';
+import 'package:integral/services/responsive_size.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,6 +10,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ResponsiveSize.init(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width);
     return MaterialApp(
       title: 'Integral',
       theme: ThemeData(
