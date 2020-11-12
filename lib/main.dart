@@ -12,10 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Integral',
       theme: ThemeData(
-        primaryColor: Color(0xffF5F7FA),
-        backgroundColor: Color(0xffF5F7FA),
-        accentColor: Color(0xffFA7022),
-      ),
+          primaryColor: Color(0xffF5F7FA),
+          backgroundColor: Color(0xffF5F7FA),
+          accentColor: Color(0xffFA7022),
       home: MainPage(),
     );
   }
