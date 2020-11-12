@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:integral/UI/dish_screen/dish_screen.dart';
 import 'package:integral/UI/main_page/main_page.dart';
+
+import 'models/dish.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,11 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Integral',
       theme: ThemeData(
+        canvasColor: Colors.white,
         primaryColor: Color(0xffF5F7FA),
         backgroundColor: Color(0xffF5F7FA),
         accentColor: Color(0xffFA7022),
       ),
-      home: MainPage(),
+      home: DishScreen(Dish.testDish()),
+      //MainPage(),
     );
   }
 }
