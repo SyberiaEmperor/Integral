@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          child: CartScreen(Cart.test()),
+          child: MainPage(),
         );
       }),
     );
