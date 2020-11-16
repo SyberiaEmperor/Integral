@@ -10,19 +10,20 @@ class DishScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Theme.of(context).canvasColor,
-          actions: [
-            RawMaterialButton(
-              onPressed: null,
-              child: Icon(Icons.shopping_basket),
-            )
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Stack(children: [
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).canvasColor,
+        actions: [
+          RawMaterialButton(
+            onPressed: null,
+            child: Icon(Icons.shopping_basket),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Stack(
+          children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -37,19 +38,21 @@ class DishScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 281.height,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: CachedNetworkImageProvider(
+                        _dish.url,
                       ),
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: CachedNetworkImageProvider(
-                          _dish.url,
-                        ),
-                      )),
+                    ),
+                  ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blueGrey[100], width: 0),
                     borderRadius: BorderRadius.only(
@@ -93,7 +96,9 @@ class DishScreen extends StatelessWidget {
                 ],
               ),
             )
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }
