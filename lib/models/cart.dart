@@ -36,4 +36,12 @@ class Cart {
   void delete(Dish dish) {
     _dishes.remove(dish);
   }
+
+  int get totalCount {
+    int result = 0;
+    for (int count in _dishes.values) {
+      result += count;
+    }
+    return result;
+  }
 }
