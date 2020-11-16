@@ -3,11 +3,20 @@ import 'package:integral/UI/dish_screen/dish_screen.dart';
 import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
+typedef _IncrementCallback = Function();
+typedef _DecrementCallback = Function();
+
 class DishTile extends StatelessWidget {
   final Dish dish;
   final int count;
+  final _IncrementCallback inc;
+  final _DecrementCallback dec;
 
-  const DishTile(this.dish, this.count);
+  const DishTile(
+      {@required this.dish,
+      @required this.count,
+      @required this.inc,
+      @required this.dec});
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +52,8 @@ class DishTile extends StatelessWidget {
                 alignment: Alignment(0.988, 0),
                 child: CountField(
                   count: count,
-                  inc: () {
-                    print("pressed inc");
-                  },
-                  dec: () {
-                    print("pressed inc");
-                  },
+                  inc: inc,
+                  dec: dec,
                 ),
               ),
             ],
@@ -61,8 +66,8 @@ class DishTile extends StatelessWidget {
 
 class CountField extends StatelessWidget {
   final int count;
-  final Function() inc;
-  final Function() dec;
+  final _IncrementCallback inc;
+  final _DecrementCallback dec;
 
   const CountField(
       {@required this.count, @required this.inc, @required this.dec});

@@ -57,9 +57,26 @@ class CartScreen extends StatelessWidget {
                 "Количество позиций: ${_cart.totalCount} ",
                 style: TextStyle(fontSize: 18),
               ),
-              DishTile(
-                _cart.dishes.entries.first.key,
-                _cart.dishes.entries.first.value,
+              SizedBox(
+                height: 6,
+              ),
+              Expanded(
+                child: ListView(
+                  children: _cart.dishes.entries
+                      .map((pair) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: DishTile(
+                                dish: pair.key,
+                                count: pair.value,
+                                inc: () {
+                                  print("inced");
+                                },
+                                dec: () {
+                                  print("deced");
+                                }),
+                          ))
+                      .toList(),
+                ),
               ),
             ],
           ),
