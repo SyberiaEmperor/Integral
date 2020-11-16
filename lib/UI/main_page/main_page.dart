@@ -86,7 +86,10 @@ class MainPage extends StatelessWidget {
                       children: [
                         Search(),
                         SizedBox(height: ResponsiveSize.height(24)),
-                        Categories(),
+                        Categories(
+                          Category.values,
+                          selectedCategory: 3,
+                        ),
                         SizedBox(height: ResponsiveSize.height(26)),
                       ],
                     ),

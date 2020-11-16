@@ -5,12 +5,13 @@ import 'package:integral/services/responsive_size.dart';
 
 class Categories extends StatelessWidget {
   final selectedCategory;
+  final List<Category> categories;
 
-  const Categories({Key key, this.selectedCategory = 0}) : super(key: key);
+  const Categories(this.categories, {Key key, this.selectedCategory = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Category> categories = Category.values;
     var theme = Theme.of(context);
 
     return Expanded(
