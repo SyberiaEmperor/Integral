@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/main_page/widgets/categories.dart';
+import 'package:integral/UI/main_page/widgets/dish_tile.dart';
 import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
@@ -44,7 +45,7 @@ class MainPage extends StatelessWidget {
                     centerTitle: true,
                   ),
                   SliverList(
-                    delegate: SliverChildListDelegate(buildItems(10)),
+                    delegate: SliverChildListDelegate(buildItems(20)),
                   ),
                 ],
               ),
@@ -58,12 +59,10 @@ class MainPage extends StatelessWidget {
   List<Widget> buildItems(int count) {
     List<Widget> items = [];
 
-    for (int i = 0; i < count; i++)
-      items.add(Container(
-        width: 100,
-        height: 100,
-        child: Text("Item$i"),
-      ));
+    for (int i = 0; i < count; i++) {
+      items.add(DishTile());
+      items.add(SizedBox(height: 10));
+    }
 
     return items;
   }

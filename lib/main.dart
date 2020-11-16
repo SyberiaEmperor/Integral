@@ -40,6 +40,13 @@ class MyApp extends StatelessWidget {
                   fontSize: ResponsiveSize.height(13.0),
                   color: Color(0xff667C8A),
                 ),
+                bodyText2: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w500,
+                  fontSize: ResponsiveSize.height(13.0),
+                  color: Colors.black,
+                ),
               ),
             ),
             child: MainPage());
