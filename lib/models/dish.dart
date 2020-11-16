@@ -39,6 +39,37 @@ class Dish {
     );
   }
 
+  static Dish testDish2() {
+    return Dish(
+      categories: {
+        Category.starter,
+        Category.plate,
+        Category.sauce,
+      },
+      description:
+          "Восхитительное блюдо! Пальчики оближешь и попросишь ещё этих мягких французских булочек, да выпьешь чаю. Нужно ещё больше букв, потому опишу я наш проект: Два приложения. В одном ты контролируешь блюда, в другом же - делаешь заказы, смотришь, что там и как, какие блюда есть, а каких нет.",
+      id: "2",
+      name: "Тестовое блюдо 2",
+      price: 100,
+      url: "https://chudo-povar.com/images/makarony-s-syrom-recept-s-foto.jpg",
+    );
+  }
+
+  static Dish testDish3() {
+    return Dish(
+      categories: {
+        Category.starter,
+      },
+      description:
+          "Восхитительное блюдо! Пальчики оближешь и попросишь ещё этих мягких французских булочек, да выпьешь чаю. Нужно ещё больше букв, потому опишу я наш проект: Два приложения. В одном ты контролируешь блюда, в другом же - делаешь заказы, смотришь, что там и как, какие блюда есть, а каких нет.",
+      id: "3",
+      name: "Тестовое блюдо 3",
+      price: 111,
+      url:
+          "https://www.koolinar.ru/all_image/recipes/144/144768/recipe_72eb979e-cfe7-47ba-852f-1a06e4618e49_large.jpg",
+    );
+  }
+
   factory Dish.fromData(Map<String, dynamic> data) {
     Set<Category> categories =
         data["catedories"].map((number) => Category.values[number]).toList();
