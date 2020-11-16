@@ -5,9 +5,22 @@ import 'package:integral/UI/main_page/widgets/dish_tile.dart';
 import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
+import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {
+  List<Dish> dishes = [
+    Dish.testDish(),
+    Dish.testDish2(),
+    Dish.testDish3(),
+    Dish.testDish(),
+    Dish.testDish2(),
+    Dish.testDish3(),
+    Dish.testDish(),
+    Dish.testDish2(),
+    Dish.testDish3()
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,7 +58,7 @@ class MainPage extends StatelessWidget {
                     centerTitle: true,
                   ),
                   SliverList(
-                    delegate: SliverChildListDelegate(buildItems(20)),
+                    delegate: SliverChildListDelegate(dishesCards(dishes)),
                   ),
                 ],
               ),
@@ -54,16 +67,5 @@ class MainPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  List<Widget> buildItems(int count) {
-    List<Widget> items = [];
-
-    for (int i = 0; i < count; i++) {
-      items.add(DishTile());
-      items.add(SizedBox(height: 10));
-    }
-
-    return items;
   }
 }

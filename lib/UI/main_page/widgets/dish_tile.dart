@@ -1,67 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class DishTile extends StatelessWidget {
+  final Dish dish;
+
+  const DishTile(this.dish);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //color: Colors.black,
-      child: Stack(
-        children: [
-          Center(
-            child: Container(
-              width: ResponsiveSize.width(280),
-              height: ResponsiveSize.height(120),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ResponsiveSize.height(10)),
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+    return Center(
+      child: Container(
+        //color: Colors.black,
+        width: ResponsiveSize.width(330),
+        height: ResponsiveSize.height(120),
+        child: Padding(
+          padding: const EdgeInsets.all(0.0),
+          child: Stack(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: ResponsiveSize.height(15.08),
-                  bottom: ResponsiveSize.height(16.92),
-                ),
+              Center(
                 child: Container(
-                    margin: EdgeInsets.only(left: ResponsiveSize.width(11.9)),
-                    width: ResponsiveSize.width(90.83),
-                    height: ResponsiveSize.height(88),
-                    child: CircleAvatar()),
+                  alignment: Alignment.center,
+                  width: ResponsiveSize.width(280),
+                  height: ResponsiveSize.height(120),
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(ResponsiveSize.height(10)),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                    width: ResponsiveSize.width(113),
-                    child: Text(
-                      "Борщ с капусткой",
-                      style: Theme.of(context).accentTextTheme.bodyText2,
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: ResponsiveSize.height(15.08),
+                      bottom: ResponsiveSize.height(16.92),
                     ),
+                    child: Container(
+                        //margin:
+                        //EdgeInsets.only(right: ResponsiveSize.width(11.9)),
+                        width: ResponsiveSize.width(100.83),
+                        height: ResponsiveSize.height(88),
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(dish.url),
+                        )),
                   ),
-                  SizedBox(height: ResponsiveSize.height(6)),
-                  Text(
-                    "Цена за 300г",
-                    style: Theme.of(context).accentTextTheme.bodyText1,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: ResponsiveSize.width(103),
+                        child: Text(
+                          dish.name,
+                          style: Theme.of(context).accentTextTheme.bodyText2,
+                        ),
+                      ),
+                      SizedBox(height: ResponsiveSize.height(6)),
+                      Container(
+                        width: ResponsiveSize.width(100),
+                        height: ResponsiveSize.height(16),
+                        child: Text(
+                          dish.description,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).accentTextTheme.bodyText1,
+                        ),
+                      ),
+                      SizedBox(height: ResponsiveSize.height(16)),
+                      Container(
+                        width: ResponsiveSize.width(61),
+                        child: Text(
+                          "${dish.price}Р",
+                          style: Theme.of(context).accentTextTheme.bodyText2,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: ResponsiveSize.height(16)),
-                  Text(
-                    "120Р",
-                    style: Theme.of(context).accentTextTheme.bodyText2,
-                  ),
-                ],
-              ),
-              SizedBox(width: ResponsiveSize.width(56)),
-              Container(
-                height: ResponsiveSize.height(120),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
+                  SizedBox(width: ResponsiveSize.width(45.5)),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
                       width: ResponsiveSize.width(56),
                       height: ResponsiveSize.height(40),
                       decoration: BoxDecoration(
@@ -77,13 +98,30 @@ class DishTile extends StatelessWidget {
                         size: ResponsiveSize.height(20),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
+}
+
+List<Widget> dishesCards(List<Dish> dishes) {
+  List<Widget> items = [];
+
+  for (var dish in dishes) {
+    items.add(Padding(
+      padding: EdgeInsets.only(
+        //right: ResponsiveSize.width(17.58),
+        left: ResponsiveSize.width(20),
+      ),
+      child: DishTile(dish),
+    ));
+    items.add(SizedBox(height: 10));
+  }
+
+  return items;
 }
