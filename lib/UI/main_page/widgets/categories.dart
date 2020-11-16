@@ -16,19 +16,25 @@ class Categories extends StatelessWidget {
     return Expanded(
       child: ListView.separated(
           separatorBuilder: (context, index) =>
-              SizedBox(width: ResponsiveSize.width(84)),
+              SizedBox(width: ResponsiveSize.width(24)),
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          itemCount: categories.length,
+          itemCount: categories.length + 2,
           itemBuilder: (context, index) {
+            if (index == 0 || index == categories.length + 1)
+              return SizedBox(
+                width: ResponsiveSize.width(6),
+              );
+
             return Container(
               height: ResponsiveSize.height(47),
-              width: ResponsiveSize.width(20),
-              child: Text(
-                categories[index].asString,
-                style: (selectedCategory == index)
-                    ? theme.primaryTextTheme.bodyText1
-                    : theme.accentTextTheme.bodyText1,
+              child: Center(
+                child: Text(
+                  categories[index - 1].asString,
+                  style: (selectedCategory == index - 1)
+                      ? theme.accentTextTheme.bodyText2
+                      : theme.accentTextTheme.bodyText1,
+                ),
               ),
             );
           }),

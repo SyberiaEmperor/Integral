@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integral/UI/cart_screen/widgets/dish_tile.dart';
 import 'package:integral/models/cart.dart';
 
 class CartScreen extends StatelessWidget {
@@ -13,22 +14,27 @@ class CartScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).canvasColor,
           actions: [
             UnconstrainedBox(
-              child: Container(
-                margin: const EdgeInsets.only(right: 8),
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Color(0xffFF6077),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: Color(0xFFFF6077),
-                    width: 0.5,
+              child: GestureDetector(
+                onTap: () {
+                  print("<<<Exit tapped.>>>");
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Color(0xffFF6077),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Color(0xFFFF6077),
+                      width: 0.5,
+                    ),
                   ),
-                ),
-                child: Icon(
-                  Icons.exit_to_app,
-                  color: Colors.white,
-                  size: 19,
+                  child: Icon(
+                    Icons.exit_to_app,
+                    color: Colors.white,
+                    size: 19,
+                  ),
                 ),
               ),
             ),
@@ -50,6 +56,10 @@ class CartScreen extends StatelessWidget {
               Text(
                 "Количество позиций: ${_cart.totalCount} ",
                 style: TextStyle(fontSize: 18),
+              ),
+              DishTile(
+                _cart.dishes.entries.first.key,
+                _cart.dishes.entries.first.value,
               ),
             ],
           ),

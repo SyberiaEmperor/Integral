@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:integral/UI/cart_screen/cart_screen.dart';
 import 'package:integral/UI/dish_screen/dish_screen.dart';
 import 'package:integral/UI/main_page/main_page.dart';
-import 'package:integral/models/cart.dart';
+import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
+import 'UI/cart_screen/cart_screen.dart';
+import 'models/cart.dart';
 import 'models/dish.dart';
 
 void main() {
@@ -42,6 +43,13 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.normal,
                 fontSize: ResponsiveSize.height(13.0),
                 color: Color(0xff667C8A),
+              ),
+              bodyText2: TextStyle(
+                fontFamily: 'Poppins',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w500,
+                fontSize: ResponsiveSize.height(13.0),
+                color: Colors.black,
               ),
             ),
           ),
