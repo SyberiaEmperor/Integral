@@ -49,7 +49,8 @@ class DishScreen extends StatelessWidget {
                       )),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.blueGrey[100], width: 0),
                     borderRadius: BorderRadius.only(
