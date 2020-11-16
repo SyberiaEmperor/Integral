@@ -25,10 +25,46 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).backgroundColor,
+          elevation: 0.0,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+            child: Container(
+                height: ResponsiveSize.height(40),
+                width: ResponsiveSize.width(30),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Theme.of(context).accentColor,
+                ),
+                child: Icon(
+                  Icons.description,
+                  size: 20,
+                  color: Colors.white,
+                )),
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
+              child: Container(
+                  height: ResponsiveSize.height(40),
+                  width: ResponsiveSize.width(35),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Theme.of(context).accentColor,
+                  ),
+                  child: Icon(
+                    Icons.shopping_cart,
+                    size: 20,
+                    color: Colors.white,
+                  )),
+            ),
+          ],
+        ),
         backgroundColor: Theme.of(context).backgroundColor,
         body: Column(
           children: [
-            UpperButtons(),
+            //UpperButtons(),
             Expanded(
               child: CustomScrollView(
                 slivers: [
