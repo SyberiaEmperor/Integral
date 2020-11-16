@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/cart_screen/widgets/dish_tile.dart';
 import 'package:integral/models/cart.dart';
+import 'package:integral/services/responsive_size.dart';
 
 class CartScreen extends StatelessWidget {
   final Cart _cart;
@@ -20,8 +21,8 @@ class CartScreen extends StatelessWidget {
                 },
                 child: Container(
                   margin: const EdgeInsets.only(right: 8),
-                  width: 40,
-                  height: 40,
+                  width: ResponsiveSize.width(40),
+                  height: ResponsiveSize.width(40),
                   decoration: BoxDecoration(
                     color: Color(0xffFF6077),
                     borderRadius: BorderRadius.circular(10),
@@ -76,6 +77,64 @@ class CartScreen extends StatelessWidget {
                                 }),
                           ))
                       .toList(),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Итого:',
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText2.color,
+                            fontFamily: Theme.of(context)
+                                .textTheme
+                                .bodyText2
+                                .fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          "1.000.000 руб.",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Theme.of(context).textTheme.bodyText1.color,
+                          ),
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        print("<<<Order>>>");
+                      },
+                      child: Container(
+                        width: ResponsiveSize.width(200),
+                        height: ResponsiveSize.width(52),
+                        decoration: BoxDecoration(
+                          color: Color(0xffFFDB60),
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular((10)),
+                              bottomLeft: Radius.circular((10))),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Заказать',
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText1.color,
+                              fontSize: 18.width,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
