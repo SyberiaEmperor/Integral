@@ -28,6 +28,14 @@ class MyApp extends StatelessWidget {
             backgroundColor: Color(0xffFFFFFF),
             accentColor: Color(0xffFA7022),
             cursorColor: Color(0xff435D6B),
+            textTheme: TextTheme(
+              bodyText1: TextStyle(
+                fontFamily: 'Poppins',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w500,
+                fontSize: ResponsiveSize.height(35.0),
+              ),
+            ),
             primaryTextTheme: TextTheme(
               bodyText1: TextStyle(
                 fontFamily: 'Poppins',
