@@ -8,7 +8,7 @@ class Dish {
   final String url;
   final int price;
 
-  List<String> get categories => _categories.map((e) => e.asString);
+  List<String> get categories => _categories.map((e) => e.asString).toList();
 
   Dish(
       {@required this.id,
