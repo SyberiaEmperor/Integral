@@ -12,7 +12,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).canvasColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           actions: [
             UnconstrainedBox(
               child: GestureDetector(

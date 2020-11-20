@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Integral',
-      home: Builder(builder: (context) {
+      builder: (context, child) {
         ResponsiveSize.init(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width);
         return Theme(
+          isMaterialAppTheme: true,
           data: ThemeData(
             primaryColor: Color(0xffF5F7FA),
             backgroundColor: Color(0xffFFFFFF),
@@ -53,8 +53,13 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          child: MainPage(),
+          child: child,
         );
+      },
+      title: 'Integral',
+      theme: ThemeData(),
+      home: Builder(builder: (context) {
+        return MainPage();
       }),
     );
   }

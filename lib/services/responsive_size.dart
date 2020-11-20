@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ResponsiveSize {
-  static double _width;
-  static double _height;
+  static double _width = 0;
+  static double _height = 0;
   static void init({@required double height, @required double width}) {
     _width = width;
     _height = height;

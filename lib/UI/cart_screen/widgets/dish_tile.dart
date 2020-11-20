@@ -30,8 +30,10 @@ class DishTile extends StatelessWidget {
           height: ResponsiveSize.height(120),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(ResponsiveSize.height(10)),
-              gradient: LinearGradient(
-                  colors: [Theme.of(context).canvasColor, Colors.green])),
+              gradient: LinearGradient(colors: [
+                Theme.of(context).backgroundColor,
+                Theme.of(context).accentColor
+              ])),
           child: Stack(
             children: [
               Align(
@@ -43,7 +45,7 @@ class DishTile extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.circular(ResponsiveSize.height(10)),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).accentColor,
                   ),
                 ),
               ),
