@@ -58,8 +58,9 @@ class DishScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: _ButtonBar(
-        leftFieldCallback: () => print("left"),
-        rightFieldCallback: () => print("Right"),
+        leftFieldCallback: () => print("Decrement"),
+        rightFieldCallback: () => print("Increment"),
+        addToCartCallback: () => print("Add to cart"),
       ),
     );
   }
@@ -129,8 +130,8 @@ class _ButtonBar extends StatelessWidget {
         CountField.horizontal(
             padding: EdgeInsets.symmetric(horizontal: 5.0),
             count: 12,
-            inc: () => print('Inc'),
-            dec: () => print('dec'),
+            inc: rightFieldCallback,
+            dec: leftFieldCallback,
             color: Colors.black),
         GestureDetector(
           onTap: addToCartCallback,
