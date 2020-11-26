@@ -59,6 +59,10 @@ class MyApp extends StatelessWidget {
                 fontSize: ResponsiveSize.height(13.0),
                 color: Colors.black,
               ),
+              button: TextStyle(
+                  fontSize: ResponsiveSize.height(14), color: Colors.white),
+              subtitle1: TextStyle(
+                  fontSize: ResponsiveSize.height(14), color: Colors.white),
             ),
           ),
           child: child,

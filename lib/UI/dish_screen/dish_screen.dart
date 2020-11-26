@@ -54,12 +54,12 @@ class DishScreen extends StatelessWidget {
                 ],
               ),
             ),
-            _ButtonBar(
-              leftFieldCallback: () => print("left"),
-              rightFieldCallback: () => print("Right"),
-            ),
           ],
         ),
+      ),
+      bottomNavigationBar: _ButtonBar(
+        leftFieldCallback: () => print("left"),
+        rightFieldCallback: () => print("Right"),
       ),
     );
   }
@@ -115,9 +115,12 @@ class _PictureAndPrice extends StatelessWidget {
 class _ButtonBar extends StatelessWidget {
   final void Function() leftFieldCallback;
   final void Function() rightFieldCallback;
+  final void Function() addToCartCallback;
 
   const _ButtonBar(
-      {@required this.leftFieldCallback, @required this.rightFieldCallback});
+      {@required this.leftFieldCallback,
+      @required this.rightFieldCallback,
+      @required this.addToCartCallback});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -129,10 +132,20 @@ class _ButtonBar extends StatelessWidget {
             inc: () => print('Inc'),
             dec: () => print('dec'),
             color: Colors.black),
-        RawMaterialButton(
-          onPressed: rightFieldCallback,
-          child: Text("Правая хуйня"),
-          fillColor: Colors.blue,
+        GestureDetector(
+          onTap: addToCartCallback,
+          child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15)),
+                color: Theme.of(context).accentColor,
+              ),
+              child: Text(
+                "Добавить в корзину",
+                style: Theme.of(context).accentTextTheme.button,
+              )),
         ),
       ],
     );

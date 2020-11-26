@@ -14,7 +14,7 @@ class TagField extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
         child: Text(
           tag,
-          style: TextStyle(fontSize: 12, color: Colors.white),
+          style: Theme.of(context).accentTextTheme.subtitle1,
           textWidthBasis: TextWidthBasis.parent,
         ),
         decoration: BoxDecoration(
