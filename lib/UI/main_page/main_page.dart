@@ -6,6 +6,7 @@ import 'package:integral/UI/main_page/widgets/dish_tile.dart';
 import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
+import 'package:integral/UI/orders_page/orders_page.dart';
 import 'package:integral/models/cart.dart';
 import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -32,18 +33,24 @@ class MainPage extends StatelessWidget {
           elevation: 0.0,
           leading: Padding(
             padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-            child: Container(
-                height: ResponsiveSize.height(40),
-                width: ResponsiveSize.width(30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Theme.of(context).accentColor,
-                ),
-                child: Icon(
-                  Icons.description,
-                  size: 20,
-                  color: Colors.white,
-                )),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OrdersPage()));
+              },
+              child: Container(
+                  height: ResponsiveSize.height(40),
+                  width: ResponsiveSize.width(30),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Theme.of(context).accentColor,
+                  ),
+                  child: Icon(
+                    Icons.description,
+                    size: 20,
+                    color: Colors.white,
+                  )),
+            ),
           ),
           actions: [
             Padding(
