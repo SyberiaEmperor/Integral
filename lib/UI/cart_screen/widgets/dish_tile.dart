@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:integral/UI/widget/count_field.dart';
 import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
-
-typedef _IncrementCallback = Function();
-typedef _DecrementCallback = Function();
 
 class DishTile extends StatelessWidget {
   final Dish dish;
   final int count;
-  final _IncrementCallback inc;
-  final _DecrementCallback dec;
+  final void Function() inc;
+  final void Function() dec;
 
   const DishTile(
       {@required this.dish,
@@ -57,57 +55,17 @@ class DishTile extends StatelessWidget {
               OverContainerContent(dish),
               Align(
                 alignment: Alignment(0.988, 0),
-                child: CountField(
+                child: CountField.vertical(
                   count: count,
                   inc: inc,
                   dec: dec,
+                  color: Theme.of(context).backgroundColor,
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class CountField extends StatelessWidget {
-  final int count;
-  final _IncrementCallback inc;
-  final _DecrementCallback dec;
-
-  const CountField(
-      {@required this.count, @required this.inc, @required this.dec});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        GestureDetector(
-          onTap: inc,
-          child: Icon(
-            Icons.add,
-            size: 24,
-            color: Theme.of(context).backgroundColor,
-          ),
-        ),
-        Text(
-          count.toString(),
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).backgroundColor,
-            fontSize: 18,
-          ),
-        ),
-        GestureDetector(
-          onTap: dec,
-          child: Icon(
-            Icons.remove,
-            size: 24,
-            color: Theme.of(context).backgroundColor,
-          ),
-        ),
-      ],
     );
   }
 }

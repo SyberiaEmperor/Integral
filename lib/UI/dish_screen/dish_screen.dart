@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/dish_screen/widgets/tag_field.dart';
+import 'package:integral/UI/widget/count_field.dart';
 import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
@@ -122,10 +123,12 @@ class _ButtonBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        RawMaterialButton(
-          onPressed: leftFieldCallback,
-          child: Text("Левая хуйня"),
-        ),
+        CountField.horizontal(
+            padding: EdgeInsets.symmetric(horizontal: 5.0),
+            count: 12,
+            inc: () => print('Inc'),
+            dec: () => print('dec'),
+            color: Colors.black),
         RawMaterialButton(
           onPressed: rightFieldCallback,
           child: Text("Правая хуйня"),
