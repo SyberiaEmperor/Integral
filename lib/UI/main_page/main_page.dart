@@ -21,58 +21,64 @@ class MainPage extends StatelessWidget {
     Dish.testDish2(),
     Dish.testDish3()
   ];
+  void unfocus(BuildContext context) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-            backgroundColor: Theme.of(context).backgroundColor,
-            elevation: 0.0,
-            leading: OrdersPageAppBarLeading(),
-            actions: [CartAppBarItem()]),
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: Column(
-          children: [
-            //UpperButtons(),
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        MarketTitle(),
-                      ],
+      child: GestureDetector(
+        onTap: () => unfocus(context),
+        child: Scaffold(
+          appBar: AppBar(
+              backgroundColor: Theme.of(context).backgroundColor,
+              elevation: 0.0,
+              leading: OrdersPageAppBarLeading(),
+              actions: [CartAppBarItem()]),
+          backgroundColor: Theme.of(context).backgroundColor,
+          body: Column(
+            children: [
+              //UpperButtons(),
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          MarketTitle(),
+                        ],
+                      ),
                     ),
-                  ),
-                  SliverAppBar(
-                    elevation: 0.0,
-                    stretch: true,
-                    collapsedHeight: ResponsiveSize.height(115),
-                    expandedHeight: ResponsiveSize.height(115),
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    flexibleSpace: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Search(),
-                        SizedBox(height: ResponsiveSize.height(24)),
-                        Categories(
-                          Category.values,
-                          selectedCategory: 3,
-                        ),
-                        SizedBox(height: ResponsiveSize.height(26)),
-                      ],
+                    SliverAppBar(
+                      elevation: 0.0,
+                      stretch: true,
+                      collapsedHeight: ResponsiveSize.height(115),
+                      expandedHeight: ResponsiveSize.height(115),
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      flexibleSpace: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Search(),
+                          SizedBox(height: ResponsiveSize.height(24)),
+                          Categories(
+                            Category.values,
+                            selectedCategory: 3,
+                          ),
+                          SizedBox(height: ResponsiveSize.height(26)),
+                        ],
+                      ),
+                      pinned: true,
+                      centerTitle: true,
                     ),
-                    pinned: true,
-                    centerTitle: true,
-                  ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(dishesCards(dishes)),
-                  ),
-                ],
+                    SliverList(
+                      delegate: SliverChildListDelegate(dishesCards(dishes)),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
