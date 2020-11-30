@@ -1,18 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:integral/UI/cart_screen/cart_screen.dart';
 import 'package:integral/UI/main_page/widgets/categories.dart';
 import 'package:integral/UI/main_page/widgets/dish_tile.dart';
 import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/orders_page/orders_page.dart';
-import 'package:integral/models/cart.dart';
 import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {
-  List<Dish> dishes = [
+  final List<Dish> dishes = [
     Dish.testDish(),
     Dish.testDish2(),
     Dish.testDish3(),
@@ -29,55 +27,10 @@ class MainPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).backgroundColor,
-          elevation: 0.0,
-          leading: Padding(
-            padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => OrdersPage()));
-              },
-              child: Container(
-                  height: ResponsiveSize.height(40),
-                  width: ResponsiveSize.width(30),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Theme.of(context).accentColor,
-                  ),
-                  child: Icon(
-                    Icons.description,
-                    size: 20,
-                    color: Colors.white,
-                  )),
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CartScreen(Cart.test())));
-                },
-                child: Container(
-                    height: ResponsiveSize.height(40),
-                    width: ResponsiveSize.width(35),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Theme.of(context).accentColor,
-                    ),
-                    child: Icon(
-                      Icons.shopping_cart,
-                      size: 20,
-                      color: Colors.white,
-                    )),
-              ),
-            ),
-          ],
-        ),
+            backgroundColor: Theme.of(context).backgroundColor,
+            elevation: 0.0,
+            leading: OrdersPageAppBarLeading(),
+            actions: [CartAppBarItem()]),
         backgroundColor: Theme.of(context).backgroundColor,
         body: Column(
           children: [
@@ -121,6 +74,33 @@ class MainPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class OrdersPageAppBarLeading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => OrdersPage()));
+        },
+        child: Container(
+            height: ResponsiveSize.height(40),
+            width: ResponsiveSize.width(30),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Theme.of(context).accentColor,
+            ),
+            child: Icon(
+              Icons.description,
+              size: 20,
+              color: Colors.white,
+            )),
       ),
     );
   }

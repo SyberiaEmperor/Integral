@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/dish_screen/dish_screen.dart';
 import 'package:integral/models/dish.dart';
@@ -44,13 +45,15 @@ class DishTile extends StatelessWidget {
                       bottom: ResponsiveSize.height(16.92),
                     ),
                     child: Container(
-                        //margin:
-                        //EdgeInsets.only(right: ResponsiveSize.width(11.9)),
-                        width: ResponsiveSize.width(100.83),
-                        height: ResponsiveSize.height(88),
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(dish.url),
-                        )),
+                      width: ResponsiveSize.width(100.83),
+                      height: ResponsiveSize.width(100.83),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: CachedNetworkImageProvider(dish.url),
+                          ),
+                          color: Colors.green),
+                    ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,

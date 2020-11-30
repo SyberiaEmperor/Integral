@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/cart_screen/widgets/dish_tile.dart';
+import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/models/cart.dart';
 import 'package:integral/services/responsive_size.dart';
 
@@ -15,6 +16,7 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         elevation: 0,
+        leading: BackButtonLeading(),
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, top: 24),

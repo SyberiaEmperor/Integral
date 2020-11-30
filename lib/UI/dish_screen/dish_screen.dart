@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/dish_screen/widgets/tag_field.dart';
+import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
+import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/UI/widget/count_field.dart';
 import 'package:integral/models/dish.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -14,15 +15,12 @@ class DishScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
+        leading: BackButtonLeading(),
         iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Theme.of(context).canvasColor,
-        actions: [
-          RawMaterialButton(
-            onPressed: null,
-            child: Icon(Icons.shopping_basket),
-          ),
-        ],
+        actions: [CartAppBarItem()],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
