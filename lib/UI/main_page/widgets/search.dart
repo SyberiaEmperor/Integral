@@ -13,6 +13,7 @@ class Search extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(bottom: 1, top: 3),
+          alignLabelWithHint: true,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(ResponsiveSize.height(5))),
           enabledBorder: InputBorder.none,

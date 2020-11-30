@@ -44,15 +44,9 @@ class DishTile extends StatelessWidget {
                       top: ResponsiveSize.height(15.08),
                       bottom: ResponsiveSize.height(16.92),
                     ),
-                    child: Container(
-                      width: ResponsiveSize.width(100.83),
-                      height: ResponsiveSize.width(100.83),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: CachedNetworkImageProvider(dish.url),
-                          ),
-                          color: Colors.green),
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(dish.url),
+                      radius: ResponsiveSize.width(50.43),
                     ),
                   ),
                   Column(

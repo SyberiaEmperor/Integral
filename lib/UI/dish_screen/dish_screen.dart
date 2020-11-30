@@ -101,7 +101,7 @@ class _PictureAndPrice extends StatelessWidget {
           children: [
             Text("Цена", style: TextStyle(fontSize: 15)),
             Text(
-              "${dishPrice} руб.",
+              "$dishPrice руб.",
               style: TextStyle(fontSize: 15),
             ),
           ],

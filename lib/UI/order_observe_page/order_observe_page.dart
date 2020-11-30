@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/widget/back_button.dart';
-import 'package:integral/services/responsive_size.dart';
 
 class OrderObservePage extends StatelessWidget {
   @override
