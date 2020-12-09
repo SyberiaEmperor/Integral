@@ -9,32 +9,32 @@ import 'package:meta/meta.dart';
 part 'mainpage_event.dart';
 part 'mainpage_state.dart';
 
-class MainpageBloc extends Bloc<MainpageEvent, MainpageState> {
+class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   final CartController cartController;
   final DishController dishController;
   List<Dish> _currentDishes;
   Category currentCategory;
-  MainpageBloc({this.cartController, this.dishController})
-      : super(MainpageInitial(dishController.byCategory(Category.all))) {
+  MainPageBloc({this.cartController, this.dishController})
+      : super(MainPageInitial(dishController.byCategory(Category.all))) {
     currentCategory = Category.all;
     _currentDishes = dishController.byCategory(currentCategory);
   }
 
   @override
-  Stream<MainpageState> mapEventToState(
-    MainpageEvent event,
+  Stream<MainPageState> mapEventToState(
+    MainPageEvent event,
   ) async* {
     yield LoadingState();
     if (event is Update) {
       //TODO: ImplementServerUpdate
-    }
-    if (event is ChangeCategory) {
+    } else if (event is ChangeCategory) {
       currentCategory = event.category;
       _currentDishes = dishController.byCategory(currentCategory);
-    }
-    if (event is Search) {
+    } else if (event is SearchEvent) {
       _currentDishes = dishController.search(event.text);
+    } else if (event is AddDishToCart) {
+      cartController.addToCart(event.dish);
     }
-    yield MainpageInitial(_currentDishes);
+    yield MainPageInitial(_currentDishes);
   }
 }

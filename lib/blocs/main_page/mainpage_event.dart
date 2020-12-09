@@ -1,23 +1,23 @@
 part of 'mainpage_bloc.dart';
 
 @immutable
-abstract class MainpageEvent {}
+abstract class MainPageEvent {}
 
-class Update extends MainpageEvent {}
+class Update extends MainPageEvent {}
 
-class Search extends MainpageEvent {
+class SearchEvent extends MainPageEvent {
   final String text;
 
-  Search(this.text);
+  SearchEvent(this.text);
 }
 
-class ChangeCategory extends MainpageEvent {
+class ChangeCategory extends MainPageEvent {
   final Category category;
 
   ChangeCategory(this.category);
 }
 
-class AddDishToCart extends MainpageEvent {
+class AddDishToCart extends MainPageEvent {
   final Dish dish;
 
   AddDishToCart(this.dish);

@@ -3,61 +3,50 @@ import 'package:flutter/material.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
-class Categories extends StatefulWidget {
-  final selectedCategory;
+class Categories extends StatelessWidget {
+  final Category selectedCategory;
   final List<Category> categories;
+  final void Function(Category) onSelect;
 
-  const Categories(this.categories, {Key key, this.selectedCategory = 0})
+  const Categories(
+      {@required this.categories,
+      @required this.selectedCategory,
+      @required this.onSelect,
+      Key key})
       : super(key: key);
-
-  @override
-  _CategoriesState createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
-  int current;
-
-  @override
-  void initState() {
-    current = widget.selectedCategory;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
     return Expanded(
-      child: ListView.separated(
-          separatorBuilder: (context, index) =>
-              SizedBox(width: ResponsiveSize.width(15)),
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: widget.categories.length + 2,
-          itemBuilder: (context, index) {
-            if (index == 0 || index == widget.categories.length + 1)
-              return SizedBox(
-                width: ResponsiveSize.width(1),
-              );
-
-            return GestureDetector(
-              onTap: () {
-                current = index - 1;
-                setState(() {});
-              },
-              child: Container(
-                height: ResponsiveSize.height(47),
-                child: Center(
-                  child: Text(
-                    widget.categories[index - 1].asString,
-                    style: (current == index - 1)
-                        ? theme.accentTextTheme.bodyText2
-                        : theme.accentTextTheme.bodyText1,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: ListView.separated(
+            separatorBuilder: (context, index) =>
+                SizedBox(width: ResponsiveSize.width(15)),
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  onSelect(categories[index]);
+                },
+                child: Container(
+                  height: ResponsiveSize.height(47),
+                  child: Center(
+                    child: Text(
+                      categories[index].asString,
+                      style: (selectedCategory.index == index)
+                          ? theme.accentTextTheme.bodyText2
+                          : theme.accentTextTheme.bodyText1,
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 }

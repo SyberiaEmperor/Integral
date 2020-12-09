@@ -2,9 +2,17 @@ import 'package:integral/entities/dish.dart';
 import 'package:integral/models/dish_controller.dart';
 
 class TestDishController implements DishController {
-  final List<Dish> _dishes;
-
-  TestDishController(this._dishes);
+  final List<Dish> _dishes = [
+    Dish.testDish(),
+    Dish.testDish2(),
+    Dish.testDish3(),
+    Dish.testDish(),
+    Dish.testDish2(),
+    Dish.testDish3(),
+    Dish.testDish(),
+    Dish.testDish2(),
+    Dish.testDish3()
+  ];
 
   @override
   List<Dish> search(String text) {
@@ -17,6 +25,6 @@ class TestDishController implements DishController {
     if (category == Category.all) {
       return _dishes;
     }
-    return _dishes.where((dish) => dish.categories.contains(category));
+    return _dishes.where((dish) => dish.containsCategory(category)).toList();
   }
 }

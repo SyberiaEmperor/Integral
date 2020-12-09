@@ -1,12 +1,12 @@
 part of 'mainpage_bloc.dart';
 
 @immutable
-abstract class MainpageState {}
+abstract class MainPageState {}
 
-class MainpageInitial extends MainpageState {
+class MainPageInitial extends MainPageState {
   final List<Dish> dishes;
 
-  MainpageInitial(this.dishes);
+  MainPageInitial(this.dishes);
 }
 
-class LoadingState extends MainpageState {}
+class LoadingState extends MainPageState {}

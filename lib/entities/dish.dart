@@ -10,6 +10,10 @@ class Dish {
 
   List<String> get categories => _categories.map((e) => e.asString).toList();
 
+  bool containsCategory(Category category) {
+    return _categories.contains(category);
+  }
+
   Dish(
       {@required this.id,
       @required this.name,
