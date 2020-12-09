@@ -14,6 +14,9 @@ class TestDishController implements DishController {
 
   @override
   List<Dish> byCategory(Category category) {
+    if (category == Category.all) {
+      return _dishes;
+    }
     return _dishes.where((dish) => dish.categories.contains(category));
   }
 }

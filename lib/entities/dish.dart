@@ -85,6 +85,7 @@ class Dish {
 }
 
 enum Category {
+  all,
   starter,
   plate,
   salad,
@@ -96,6 +97,8 @@ enum Category {
 extension str on Category {
   String get asString {
     switch (this) {
+      case Category.all:
+        return "Все";
       case Category.starter:
         return "Первые блюда";
       case Category.plate:
