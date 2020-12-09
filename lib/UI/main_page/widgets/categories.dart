@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:integral/models/dish.dart';
+import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class Categories extends StatefulWidget {

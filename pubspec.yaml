@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   cached_network_image: ^2.3.3
+  flutter_bloc: ^6.1.1
+
 
 
 

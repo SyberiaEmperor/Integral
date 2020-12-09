@@ -6,7 +6,7 @@ import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/orders_page/orders_page.dart';
-import 'package:integral/models/dish.dart';
+import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {

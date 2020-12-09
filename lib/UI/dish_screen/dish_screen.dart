@@ -4,7 +4,7 @@ import 'package:integral/UI/dish_screen/widgets/tag_field.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/UI/widget/count_field.dart';
-import 'package:integral/models/dish.dart';
+import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class DishScreen extends StatelessWidget {

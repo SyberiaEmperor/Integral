@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/widget/count_field.dart';
-import 'package:integral/models/dish.dart';
+import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class DishTile extends StatelessWidget {

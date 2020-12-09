@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/dish_screen/dish_screen.dart';
-import 'package:integral/models/dish.dart';
+import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class DishTile extends StatelessWidget {
