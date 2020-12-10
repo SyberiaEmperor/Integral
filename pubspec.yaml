@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   cached_network_image: ^2.3.3
   flutter_bloc: ^6.1.1
+  pedantic: ^1.9.2
+
 
 
 
@@ -36,6 +38,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
