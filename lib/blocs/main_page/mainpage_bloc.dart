@@ -33,7 +33,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     } else if (event is SearchEvent) {
       _currentDishes = dishController.search(event.text);
     } else if (event is AddDishToCart) {
-      cartController.addToCart(event.dish);
+      await cartController.addToCart(event.dish);
     }
     yield MainPageInitial(_currentDishes);
   }

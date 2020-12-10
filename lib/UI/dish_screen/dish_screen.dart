@@ -99,9 +99,9 @@ class _PictureAndPrice extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Цена", style: TextStyle(fontSize: 15)),
+            Text('Цена', style: TextStyle(fontSize: 15)),
             Text(
-              "$dishPrice руб.",
+              '$dishPrice руб.',
               style: TextStyle(fontSize: 15),
             ),
           ],
@@ -142,7 +142,7 @@ class _ButtonBar extends StatelessWidget {
                 color: Theme.of(context).accentColor,
               ),
               child: Text(
-                "Добавить в корзину",
+                'Добавить в корзину',
                 style: Theme.of(context).accentTextTheme.button,
               )),
         ),
