@@ -11,7 +11,7 @@ part 'dish_page_state.dart';
 class DishPageBloc extends Bloc<DishPageEvent, DishPageState> {
   final CartController cartController;
   final Dish dish;
-  DishPageBloc({this.cartController, this.dish})
+  DishPageBloc({@required this.cartController, @required this.dish})
       : super(
             DishPageMainState(dish: dish, count: cartController.countOf(dish)));
 
@@ -19,7 +19,6 @@ class DishPageBloc extends Bloc<DishPageEvent, DishPageState> {
   Stream<DishPageState> mapEventToState(
     DishPageEvent event,
   ) async* {
-    yield LoadingState();
     if (event is IncrementEvent) {
       await cartController.addToCart(dish);
     }

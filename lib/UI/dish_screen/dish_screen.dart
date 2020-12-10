@@ -1,18 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/dish_screen/widgets/tag_field.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/UI/widget/count_field.dart';
+import 'package:integral/blocs/dish_page/dish_page_bloc.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class DishScreen extends StatelessWidget {
-  final Dish _dish;
+  DishScreen({Key key}) : super(key: key);
 
-  const DishScreen(this._dish, {Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var bloc = BlocProvider.of<DishPageBloc>(context);
+
+    void _decrement() {
+      bloc.add(DecrementEvent());
+    }
+
+    void _increment() {
+      bloc.add(IncrementEvent());
+    }
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -24,41 +35,56 @@ class DishScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
+        child: BlocBuilder(
+          cubit: bloc,
+          builder: (context, state) {
+            if (state is DishPageMainState) {
+              Dish dish = state.dish;
+              return Column(
                 children: [
-                  Center(
-                    child: Text(
-                      _dish.name,
-                      style: TextStyle(fontSize: 21),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        Center(
+                          child: Text(
+                            dish.name,
+                            style: TextStyle(fontSize: 21),
+                          ),
+                        ),
+                        SizedBox(height: 20.height),
+                        _PictureAndPrice(
+                          dishPrice: dish.price,
+                          picUrl: dish.url,
+                        ),
+                        SizedBox(height: 20.height),
+                        Text(
+                          'Описание:\n\n${dish.description}',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        SizedBox(height: 20.height),
+                        Wrap(
+                          children:
+                              dish.categories.map((e) => TagField(e)).toList(),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 20.height),
-                  _PictureAndPrice(
-                    dishPrice: _dish.price,
-                    picUrl: _dish.url,
-                  ),
-                  SizedBox(height: 20.height),
-                  Text(
-                    'Описание:\n\n${_dish.description}',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  SizedBox(height: 20.height),
-                  Wrap(
-                    children: _dish.categories.map((e) => TagField(e)).toList(),
-                  ),
                 ],
-              ),
-            ),
-          ],
+              );
+            }
+            return Center(child: Text('Что-то пошло не так'));
+          },
         ),
       ),
-      bottomNavigationBar: _ButtonBar(
-        leftFieldCallback: () => print('Decrement'),
-        rightFieldCallback: () => print('Increment'),
-        addToCartCallback: () => print('Add to cart'),
+      bottomNavigationBar: BlocBuilder<DishPageBloc, DishPageState>(
+        builder: (context, state) {
+          return _ButtonBar(
+            leftFieldCallback: _decrement,
+            rightFieldCallback: _increment,
+            addToCartCallback: _increment,
+            count: (bloc.state as DishPageMainState).count,
+          );
+        },
       ),
     );
   }
@@ -112,6 +138,7 @@ class _PictureAndPrice extends StatelessWidget {
 }
 
 class _ButtonBar extends StatelessWidget {
+  final int count;
   final void Function() leftFieldCallback;
   final void Function() rightFieldCallback;
   final void Function() addToCartCallback;
@@ -119,7 +146,8 @@ class _ButtonBar extends StatelessWidget {
   const _ButtonBar(
       {@required this.leftFieldCallback,
       @required this.rightFieldCallback,
-      @required this.addToCartCallback});
+      @required this.addToCartCallback,
+      @required this.count});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -127,7 +155,7 @@ class _ButtonBar extends StatelessWidget {
       children: [
         CountField.horizontal(
             padding: EdgeInsets.symmetric(horizontal: 5.0),
-            count: 12,
+            count: count,
             inc: rightFieldCallback,
             dec: leftFieldCallback,
             color: Colors.black),

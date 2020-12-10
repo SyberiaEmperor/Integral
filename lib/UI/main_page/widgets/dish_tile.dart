@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/dish_screen/dish_screen.dart';
+import 'package:integral/blocs/dish_page/dish_page_bloc.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -10,21 +11,27 @@ class DishTile extends StatelessWidget {
   final Dish dish;
   final VoidCallback onAdd;
 
-  const DishTile({
+  DishTile({
     @required this.dish,
     @required this.onAdd,
   });
 
   @override
   Widget build(BuildContext context) {
+    Widget page = BlocProvider.value(
+      value: BlocProvider.of<DishPageBloc>(context),
+      child: DishScreen(),
+    );
+
     return Align(
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DishScreen(dish)));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
         },
         child: Container(
-          //color: Colors.black,
           width: ResponsiveSize.width(330),
           height: ResponsiveSize.height(120),
           child: Stack(
@@ -129,9 +136,14 @@ List<Widget> dishesCards(List<Dish> dishes, BuildContext context) {
         //right: ResponsiveSize.width(17.58),
         left: ResponsiveSize.width(20),
       ),
-      child: DishTile(
-          dish: dish,
-          onAdd: () => context.read<MainPageBloc>().add(AddDishToCart(dish))),
+      child: BlocProvider(
+        create: (context) => DishPageBloc(
+            dish: dish,
+            cartController: context.read<MainPageBloc>().cartController),
+        child: DishTile(
+            dish: dish,
+            onAdd: () => context.read<MainPageBloc>().add(AddDishToCart(dish))),
+      ),
     ));
     items.add(SizedBox(height: 10));
   }

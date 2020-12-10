@@ -9,5 +9,3 @@ class DishPageMainState extends DishPageState {
 
   DishPageMainState({@required this.dish, @required this.count});
 }
-
-class LoadingState extends DishPageState {}
