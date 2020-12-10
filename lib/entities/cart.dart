@@ -2,7 +2,7 @@ import 'dish.dart';
 
 class Cart {
   final Map<Dish, int> _dishes;
-  Map<Dish, int> get dishes => Map.from(_dishes);
+  Map<Dish, int> get dishes => Map<Dish, int>.from(_dishes);
 
   Cart() : _dishes = Map<Dish, int>();
 
