@@ -8,9 +8,9 @@ class Order {
   double getPrice() {
     double price = 0.0;
 
-    for (var dish in dishes.keys) {
-      price += dish.price * dishes[dish];
-    }
+    dishes.forEach((key, value) {
+      price += key.price * dishes[key];
+    });
 
     return price;
   }
