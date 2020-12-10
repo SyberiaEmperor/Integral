@@ -21,7 +21,7 @@ class Categories extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: ListView.separated(
             separatorBuilder: (context, index) =>
                 SizedBox(width: ResponsiveSize.width(15)),
