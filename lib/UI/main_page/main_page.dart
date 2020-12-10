@@ -30,7 +30,7 @@ class MainPage extends StatelessWidget {
           backgroundColor: Theme.of(context).backgroundColor,
           body: BlocBuilder<MainPageBloc, MainPageState>(
               builder: (context, state) {
-            if (state is MainPageInitial) {
+            if (state is MainPageInitialState) {
               return Column(
                 children: [
                   //UpperButtons(),
@@ -65,7 +65,7 @@ class MainPage extends StatelessWidget {
                                 onSelect: (category) {
                                   context
                                       .read<MainPageBloc>()
-                                      .add(ChangeCategory(category));
+                                      .add(ChangeCategoryEvent(category));
                                 },
                               ),
                               SizedBox(height: ResponsiveSize.height(26)),

@@ -15,7 +15,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   List<Dish> _currentDishes;
   Category currentCategory;
   MainPageBloc({this.cartController, this.dishController})
-      : super(MainPageInitial(dishController.byCategory(Category.all))) {
+      : super(MainPageInitialState(dishController.byCategory(Category.all))) {
     currentCategory = Category.all;
     _currentDishes = dishController.byCategory(currentCategory);
   }
@@ -27,14 +27,14 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     yield LoadingState();
     if (event is Update) {
       //TODO: ImplementServerUpdate
-    } else if (event is ChangeCategory) {
+    } else if (event is ChangeCategoryEvent) {
       currentCategory = event.category;
       _currentDishes = dishController.byCategory(currentCategory);
     } else if (event is SearchEvent) {
       _currentDishes = dishController.search(event.text);
-    } else if (event is AddDishToCart) {
+    } else if (event is AddDishToCartEvent) {
       await cartController.addToCart(event.dish);
     }
-    yield MainPageInitial(_currentDishes);
+    yield MainPageInitialState(_currentDishes);
   }
 }

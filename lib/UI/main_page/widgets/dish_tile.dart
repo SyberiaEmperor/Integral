@@ -141,7 +141,8 @@ List<Widget> dishesCards(List<Dish> dishes, BuildContext context) {
       ),
       child: DishTile(
           dish: dish,
-          onAdd: () => context.read<MainPageBloc>().add(AddDishToCart(dish))),
+          onAdd: () =>
+              context.read<MainPageBloc>().add(AddDishToCartEvent(dish))),
     ));
     items.add(SizedBox(height: 10));
   }

@@ -3,10 +3,10 @@ part of 'mainpage_bloc.dart';
 @immutable
 abstract class MainPageState {}
 
-class MainPageInitial extends MainPageState {
+class MainPageInitialState extends MainPageState {
   final List<Dish> dishes;
 
-  MainPageInitial(this.dishes);
+  MainPageInitialState(this.dishes);
 }
 
 class LoadingState extends MainPageState {}

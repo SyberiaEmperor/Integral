@@ -11,14 +11,14 @@ class SearchEvent extends MainPageEvent {
   SearchEvent(this.text);
 }
 
-class ChangeCategory extends MainPageEvent {
+class ChangeCategoryEvent extends MainPageEvent {
   final Category category;
 
-  ChangeCategory(this.category);
+  ChangeCategoryEvent(this.category);
 }
 
-class AddDishToCart extends MainPageEvent {
+class AddDishToCartEvent extends MainPageEvent {
   final Dish dish;
 
-  AddDishToCart(this.dish);
+  AddDishToCartEvent(this.dish);
 }
