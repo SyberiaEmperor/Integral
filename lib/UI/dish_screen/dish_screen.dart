@@ -76,7 +76,8 @@ class DishScreen extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: BlocBuilder<DishPageBloc, DishPageState>(
+      bottomNavigationBar: BlocBuilder(
+        cubit: bloc,
         builder: (context, state) {
           return _ButtonBar(
             leftFieldCallback: _decrement,

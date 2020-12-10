@@ -24,13 +24,14 @@ class DishTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (_context) => BlocProvider(
-                      create: (_context) => DishPageBloc(
-                          cartController: BlocProvider.of<MainPageBloc>(context)
-                              .cartController,
-                          dish: dish),
-                      child: DishScreen(),
-                    )),
+              builder: (_) => BlocProvider(
+                create: (_) => DishPageBloc(
+                    cartController:
+                        BlocProvider.of<MainPageBloc>(context).cartController,
+                    dish: dish),
+                child: DishScreen(),
+              ),
+            ),
           );
         },
         child: Container(
