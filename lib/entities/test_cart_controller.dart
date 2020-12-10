@@ -14,7 +14,7 @@ class TestCartController implements CartController {
   }
 
   @override
-  Future<void> deleteFromCart(Dish dish) {
+  Future<void> decrementFromCart(Dish dish) {
     _cart.decrement(dish);
     return Future(() {});
   }
@@ -27,4 +27,9 @@ class TestCartController implements CartController {
 
   @override
   int get totalCount => _cart.totalCount;
+
+  @override
+  int countOf(Dish dish) {
+    return _cart.dishes[dish] ?? 0;
+  }
 }
