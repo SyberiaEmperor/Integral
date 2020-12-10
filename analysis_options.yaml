@@ -24,7 +24,7 @@ linter:
     unnecessary_this: true
     use_raw_strings: true
     use_to_and_as_if_applicable: true
-    always_specify_types: true
+    
 
     
 
