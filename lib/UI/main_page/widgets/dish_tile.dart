@@ -11,7 +11,7 @@ class DishTile extends StatelessWidget {
   final Dish dish;
   final VoidCallback onAdd;
 
-  DishTile({
+  const DishTile({
     @required this.dish,
     @required this.onAdd,
   });

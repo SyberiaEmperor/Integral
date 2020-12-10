@@ -10,7 +10,7 @@ import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class DishScreen extends StatelessWidget {
-  DishScreen({Key key}) : super(key: key);
+  const DishScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class DishScreen extends StatelessWidget {
             leftFieldCallback: _decrement,
             rightFieldCallback: _increment,
             addToCartCallback: _increment,
-            count: (bloc.state as DishPageMainState).count,
+            count: (state as DishPageMainState).count,
           );
         },
       ),
