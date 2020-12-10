@@ -18,17 +18,19 @@ class DishTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget page = BlocProvider.value(
-      value: BlocProvider.of<DishPageBloc>(context),
-      child: DishScreen(),
-    );
-
     return Align(
       child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => page),
+            MaterialPageRoute(
+                builder: (_context) => BlocProvider(
+                      create: (_context) => DishPageBloc(
+                          cartController: BlocProvider.of<MainPageBloc>(context)
+                              .cartController,
+                          dish: dish),
+                      child: DishScreen(),
+                    )),
           );
         },
         child: Container(
@@ -136,14 +138,9 @@ List<Widget> dishesCards(List<Dish> dishes, BuildContext context) {
         //right: ResponsiveSize.width(17.58),
         left: ResponsiveSize.width(20),
       ),
-      child: BlocProvider(
-        create: (context) => DishPageBloc(
-            dish: dish,
-            cartController: context.read<MainPageBloc>().cartController),
-        child: DishTile(
-            dish: dish,
-            onAdd: () => context.read<MainPageBloc>().add(AddDishToCart(dish))),
-      ),
+      child: DishTile(
+          dish: dish,
+          onAdd: () => context.read<MainPageBloc>().add(AddDishToCart(dish))),
     ));
     items.add(SizedBox(height: 10));
   }
