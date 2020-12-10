@@ -91,7 +91,7 @@ class MainPage extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text("Loading data...")
+                    Text('Loading data...')
                   ],
                 ),
               );

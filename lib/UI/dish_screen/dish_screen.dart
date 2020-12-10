@@ -42,7 +42,7 @@ class DishScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20.height),
                   Text(
-                    "Описание:\n\n${_dish.description}",
+                    'Описание:\n\n${_dish.description}',
                     style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(height: 20.height),
@@ -56,9 +56,9 @@ class DishScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: _ButtonBar(
-        leftFieldCallback: () => print("Decrement"),
-        rightFieldCallback: () => print("Increment"),
-        addToCartCallback: () => print("Add to cart"),
+        leftFieldCallback: () => print('Decrement'),
+        rightFieldCallback: () => print('Increment'),
+        addToCartCallback: () => print('Add to cart'),
       ),
     );
   }

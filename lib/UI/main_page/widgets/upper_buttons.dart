@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:integral/UI/cart_screen/cart_screen.dart';
-import 'package:integral/entities/cart.dart';
-import 'package:integral/services/responsive_size.dart';
+
+import '../../../entities/cart.dart';
+import '../../../services/responsive_size.dart';
+import '../../cart_screen/cart_screen.dart';
 
 class CartAppBarItem extends StatelessWidget {
   @override

@@ -20,7 +20,7 @@ class DishTile extends StatelessWidget {
     return Align(
       child: GestureDetector(
         onTap: () {
-          print("Tapped");
+          print('Tapped');
         },
         child: Container(
           width: ResponsiveSize.width(330),
@@ -114,7 +114,7 @@ class OverContainerContent extends StatelessWidget {
             Container(
               width: ResponsiveSize.width(61),
               child: Text(
-                "${dish.price}Р",
+                '${dish.price}Р',
                 style: Theme.of(context).accentTextTheme.bodyText2,
               ),
             ),

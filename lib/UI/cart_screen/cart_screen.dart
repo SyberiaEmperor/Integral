@@ -24,14 +24,14 @@ class CartScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Заказ",
+              'Заказ',
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 6,
             ),
             Text(
-              "Количество позиций: ${_cart.totalCount} ",
+              'Количество позиций: ${_cart.totalCount} ',
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(
@@ -46,10 +46,10 @@ class CartScreen extends StatelessWidget {
                               dish: pair.key,
                               count: pair.value,
                               inc: () {
-                                print("inced");
+                                print('inced');
                               },
                               dec: () {
-                                print("deced");
+                                print('deced');
                               }),
                         ))
                     .toList(),
@@ -79,7 +79,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "1.000.000 руб.",
+                    '1.000.000 руб.',
                     style: TextStyle(
                       fontSize: 20,
                       color: Theme.of(context).textTheme.bodyText1.color,
@@ -90,7 +90,7 @@ class CartScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                print("<<<Order>>>");
+                print('<<<Order>>>');
               },
               child: Container(
                 width: ResponsiveSize.width(200),

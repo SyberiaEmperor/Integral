@@ -15,19 +15,19 @@ class OrderObservePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "ЗАКАЗ #11111111",
+              'ЗАКАЗ #11111111',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              "Цена 1500р",
+              'Цена 1500р',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              "Дата 21.01.2020",
+              'Дата 21.01.2020',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              "Статус НЕИЗВЕСТНО",
+              'Статус НЕИЗВЕСТНО',
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
@@ -38,7 +38,7 @@ class OrderObservePage extends StatelessWidget {
         child: Center(
           child: FlatButton(
             onPressed: () {},
-            child: Text("Отменить заказ"),
+            child: Text('Отменить заказ'),
           ),
         ),
       ),
