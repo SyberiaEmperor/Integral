@@ -60,9 +60,12 @@ class DishTile extends StatelessWidget {
                       top: ResponsiveSize.height(15.08),
                       bottom: ResponsiveSize.height(16.92),
                     ),
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(dish.url),
-                      radius: ResponsiveSize.width(50.43),
+                    child: Hero(
+                      tag: '${dish.hashCode}',
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(dish.url),
+                        radius: ResponsiveSize.width(50.43),
+                      ),
                     ),
                   ),
                   Column(

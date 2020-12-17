@@ -55,6 +55,7 @@ class DishScreen extends StatelessWidget {
                         _PictureAndPrice(
                           dishPrice: dish.price,
                           picUrl: dish.url,
+                          heroId: dish.hashCode.toString(),
                         ),
                         SizedBox(height: 20.height),
                         Text(
@@ -92,25 +93,30 @@ class DishScreen extends StatelessWidget {
 }
 
 class _PictureAndPrice extends StatelessWidget {
+  final String heroId;
   final String picUrl;
   final int dishPrice;
 
-  const _PictureAndPrice({@required this.picUrl, @required this.dishPrice});
+  const _PictureAndPrice(
+      {@required this.picUrl, @required this.dishPrice, @required this.heroId});
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Container(
-        width: double.infinity,
-        height: 281.height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          ),
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: CachedNetworkImageProvider(picUrl),
+      Hero(
+        tag: heroId,
+        child: Container(
+          width: double.infinity,
+          height: 281.height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: CachedNetworkImageProvider(picUrl),
+            ),
           ),
         ),
       ),
