@@ -32,4 +32,7 @@ class TestCartController implements CartController {
   int countOf(Dish dish) {
     return _cart.dishes[dish] ?? 0;
   }
+
+  @override
+  Map<Dish, int> get dishes => _cart.dishes;
 }
