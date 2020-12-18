@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/main_page/main_page.dart';
 import 'package:integral/entities/cart.dart';
+import 'package:integral/entities/data_repository.dart';
 import 'package:integral/entities/test_cart_controller.dart';
 import 'package:integral/entities/test_dish_controller.dart';
+import 'package:integral/entities/user.dart';
 import 'package:integral/services/responsive_size.dart';
 
 import 'blocs/main_page/mainpage_bloc.dart';
@@ -71,9 +73,13 @@ class MyApp extends StatelessWidget {
       title: 'Integral',
       theme: ThemeData(),
       home: Builder(builder: (context) {
+        //TODO:Временно для тестов
+        DataRepository.init(user: User.test());
+        //TODO:
+
         return BlocProvider(
           create: (context) => MainPageBloc(
-            cartController: TestCartController(Cart.test()),
+            cartController: DataRepository.cartController,
             dishController: TestDishController(),
           ),
           child: MainPage(),

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:integral/blocs/cart_bloc/cart_bloc.dart' as cart;
+import 'package:integral/blocs/main_page/mainpage_bloc.dart' as main;
+import 'package:integral/entities/data_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../entities/cart.dart';
 import '../../../services/responsive_size.dart';
@@ -11,8 +15,13 @@ class CartAppBarItem extends StatelessWidget {
       padding: EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CartScreen(Cart.test())));
+          var page = BlocProvider(
+            create: (BuildContext context) => cart.CartBloc(
+                cart.LoadingState("Загрузка"), DataRepository.cartController),
+            child: CartScreen(),
+          );
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => page));
         },
         child: Container(
             height: ResponsiveSize.height(40),

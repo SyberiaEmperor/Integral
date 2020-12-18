@@ -5,6 +5,7 @@ abstract class CartController {
   Future<void> removeFromCart(Dish dish);
   Future<void> decrementFromCart(Dish dish);
   int countOf(Dish dish);
+  double getTotalPrice();
   Map<Dish, int> get dishes;
 
   int get totalCount;

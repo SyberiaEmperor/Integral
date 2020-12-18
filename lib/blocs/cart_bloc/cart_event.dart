@@ -22,3 +22,5 @@ class EraseEvent extends CartEvent {
 }
 
 class PurchaseEvent extends CartEvent {}
+
+class UpdateEvent extends CartEvent {}

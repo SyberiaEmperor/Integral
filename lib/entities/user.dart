@@ -7,4 +7,8 @@ class User {
   Cart cart;
 
   User(this.id, this.phone) : cart = Cart();
+
+  factory User.test() {
+    return User("123", "123456789");
+  }
 }

@@ -35,4 +35,13 @@ class TestCartController implements CartController {
 
   @override
   Map<Dish, int> get dishes => _cart.dishes;
+
+  @override
+  double getTotalPrice() {
+    double total = 0.0;
+    _cart.dishes.forEach((key, value) {
+      total += key.price * value;
+    });
+    return total;
+  }
 }
