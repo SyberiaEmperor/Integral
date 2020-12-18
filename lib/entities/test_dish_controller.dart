@@ -1,8 +1,9 @@
 import 'package:integral/entities/dish.dart';
 import 'package:integral/models/dish_controller.dart';
+import 'package:integral/services/requests.dart';
 
 class TestDishController implements DishController {
-  final List<Dish> _dishes = [
+  List<Dish> _dishes = [
     Dish.testDish(),
     Dish.testDish2(),
     Dish.testDish3(),
@@ -29,7 +30,7 @@ class TestDishController implements DishController {
   }
 
   @override
-  void getDishes() {
-
+  void updateDishes() async {
+      _dishes = await Requests.getDishes();
   }
 }

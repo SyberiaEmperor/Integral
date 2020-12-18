@@ -6,6 +6,7 @@ import 'package:integral/entities/data_repository.dart';
 import 'package:integral/entities/test_cart_controller.dart';
 import 'package:integral/entities/test_dish_controller.dart';
 import 'package:integral/entities/user.dart';
+import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
 
 import 'blocs/main_page/mainpage_bloc.dart';
@@ -76,12 +77,12 @@ class MyApp extends StatelessWidget {
         //TODO:Временно для тестов
         DataRepository.init(user: User.test());
         //TODO:
-
+        Requests.initReqs();
         return BlocProvider(
           create: (context) => MainPageBloc(
             cartController: DataRepository.cartController,
             dishController: TestDishController(),
-          ),
+          )..add(Update()),
           child: MainPage(),
         );
       }),

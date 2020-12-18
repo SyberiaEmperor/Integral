@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dio/dio.dart';
 import 'package:integral/entities/dish.dart';
 
@@ -14,7 +12,7 @@ class Requests {
 
   static Dio _baseDio;
 
-  void initReqs() {
+  static void initReqs() {
     _baseDio = Dio();
 
     _baseDio.options.baseUrl = BASE_URI;
@@ -35,6 +33,9 @@ class Requests {
         dishes.add(Dish.fromData(element));
       });
       return dishes;
+    }
+    if (response.statusCode == 204) {
+      return [];
     } else {
       throw RequestException("Ошибка при запросе");
     }

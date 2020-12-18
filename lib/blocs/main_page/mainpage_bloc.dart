@@ -15,9 +15,9 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   List<Dish> _currentDishes;
   Category currentCategory;
   MainPageBloc({this.cartController, this.dishController})
-      : super(MainPageInitialState(dishController.byCategory(Category.all))) {
+      : super(LoadingState()) {
     currentCategory = Category.all;
-    _currentDishes = dishController.byCategory(currentCategory);
+    //_currentDishes = dishController.byCategory(currentCategory);
   }
 
   @override
@@ -26,7 +26,10 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   ) async* {
     yield LoadingState();
     if (event is Update) {
-      //TODO: ImplementServerUpdate
+      {
+        await dishController.updateDishes();
+        _currentDishes = dishController.byCategory(currentCategory);
+      }
     } else if (event is ChangeCategoryEvent) {
       currentCategory = event.category;
       _currentDishes = dishController.byCategory(currentCategory);
