@@ -27,4 +27,9 @@ class TestDishController implements DishController {
     }
     return _dishes.where((dish) => dish.containsCategory(category)).toList();
   }
+
+  @override
+  void getDishes() {
+
+  }
 }
