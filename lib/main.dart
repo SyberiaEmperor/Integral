@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:integral/UI/auth/phone_page.dart';
 import 'package:integral/UI/main_page/main_page.dart';
 import 'package:integral/entities/cart.dart';
 import 'package:integral/entities/data_repository.dart';
@@ -73,19 +74,7 @@ class MyApp extends StatelessWidget {
       },
       title: 'Integral',
       theme: ThemeData(),
-      home: Builder(builder: (context) {
-        //TODO:Временно для тестов
-        DataRepository.init(user: User.test());
-        //TODO:
-        Requests.initReqs();
-        return BlocProvider(
-          create: (context) => MainPageBloc(
-            cartController: DataRepository.cartController,
-            dishController: TestDishController(),
-          )..add(Update()),
-          child: MainPage(),
-        );
-      }),
+      home: PhonePage(),
     );
   }
 }
