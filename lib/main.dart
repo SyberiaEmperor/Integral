@@ -13,6 +13,7 @@ import 'package:integral/services/responsive_size.dart';
 import 'blocs/main_page/mainpage_bloc.dart';
 
 void main() {
+  Requests.initReqs();
   runApp(MyApp());
 }
 
@@ -74,7 +75,19 @@ class MyApp extends StatelessWidget {
       },
       title: 'Integral',
       theme: ThemeData(),
-      home: PhonePage(),
+      home: Builder(builder: (context) {
+        //TODO:Временно для тестов
+        DataRepository.init(user: User.test());
+        //TODO:
+        //Requests.initReqs();
+        return BlocProvider(
+          create: (context) => MainPageBloc(
+            cartController: DataRepository.cartController,
+            dishController: TestDishController(),
+          )..add(Update()),
+          child: MainPage(),
+        );
+      }),
     );
   }
 }

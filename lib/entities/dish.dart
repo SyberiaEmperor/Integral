@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integral/services/requests.dart';
 
 class Dish {
   final String id;
@@ -75,13 +76,13 @@ class Dish {
   }
 
   factory Dish.fromData(Map<String, dynamic> data) {
-    Set<Category> categories =
-        data['catedories'].map((number) => Category.values[number]).toList();
+    Set<Category> categories = Set<Category>.from(
+        data['categories'].map((number) => Category.values[number]));
     return Dish(
       categories: categories,
       description: data['description'],
-      url: data['url'],
-      id: data['id'],
+      url: Requests.BASE_URI + data['picture']['url'],
+      id: data['id'].toString(),
       name: data['name'],
       price: data['price'],
     );

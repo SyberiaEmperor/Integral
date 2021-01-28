@@ -3,10 +3,10 @@ import 'package:integral/entities/dish.dart';
 
 class Requests {
   static const IP = '178.154.255.209:3777';
-  static const BASE_URI = 'http://$IP/';
+  static const BASE_URI = 'http://$IP';
 
-  static const _DISHES = "dishes/";
-  static const _USER = "user/";
+  static const _DISHES = "/dishes";
+  static const _USER = "/user";
 
   static const TIMEOUT = 5000;
 
