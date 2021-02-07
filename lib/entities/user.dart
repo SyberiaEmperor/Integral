@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:integral/entities/testing/user_test.dart';
 import 'package:integral/resources/app_strings.dart';
 
 import 'cart.dart';
@@ -14,7 +15,7 @@ class User {
 
   ///Creates a user with constant fields
   factory User.test() {
-    return User(id: '123', phone: '123456789', token: '1');
+    return TestUser();
   }
 
   factory User.fromJson(Map<String, String> data) {
