@@ -6,10 +6,13 @@ import 'package:integral/entities/cart.dart';
 import 'package:integral/entities/data_repository.dart';
 import 'package:integral/entities/test_cart_controller.dart';
 import 'package:integral/entities/test_dish_controller.dart';
+import 'package:integral/entities/testing/auth_test.dart';
+import 'package:integral/entities/testing/udr_test.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
 
+import 'blocs/auth_bloc/auth_bloc.dart';
 import 'blocs/main_page/mainpage_bloc.dart';
 
 void main() {
@@ -81,11 +84,11 @@ class MyApp extends StatelessWidget {
         //TODO:
         //Requests.initReqs();
         return BlocProvider(
-          create: (context) => MainPageBloc(
-            cartController: DataRepository.cartController,
-            dishController: TestDishController(),
-          )..add(Update()),
-          child: MainPage(),
+          create: (context) => AuthBloc(
+            UDRTest(),
+            TestAuth(),
+          )..add(AuthFirstCheckEvent()),
+          child: PhonePage(),
         );
       }),
     );

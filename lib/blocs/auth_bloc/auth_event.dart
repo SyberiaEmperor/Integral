@@ -19,8 +19,8 @@ class AuthSignInEvent extends AuthEvent {
 
 class AuthFirstCheckEvent extends AuthEvent {}
 
-class AuthSendPasswordEvent extends AuthEvent {
+class AuthAskPasswordEvent extends AuthEvent {
   final String phoneNumber;
 
-  AuthSendPasswordEvent(this.phoneNumber);
+  AuthAskPasswordEvent(this.phoneNumber);
 }

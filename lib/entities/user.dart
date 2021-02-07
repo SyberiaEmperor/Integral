@@ -10,8 +10,8 @@ class User {
   final String token;
   final Cart cart;
 
-  const User({@required this.id, @required this.phone, @required this.token})
-      : cart = const Cart();
+  User({@required this.id, @required this.phone, @required this.token})
+      : cart = Cart();
 
   ///Creates a user with constant fields
   factory User.test() {
