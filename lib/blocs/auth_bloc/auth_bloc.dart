@@ -36,6 +36,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     }
     if (event is AuthLogInEvent) {
+      //TODO: В КЛИЕНТЕ НЕТ РАЗДЕЛЕНИЯ МЕЖДУ РЕГИСТРАЦИЕЙ И АВТОРИЗАЦИЕЙ
       yield await auth(
         event.data,
       );
@@ -46,7 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         signIn: true,
       );
     }
-    if (event is AuthSendPasswordEvent) {
+    if (event is AuthAskPasswordEvent) {
       _authService.sendPassword(event.phoneNumber);
     }
     yield AuthMainState();

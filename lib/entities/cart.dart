@@ -1,10 +1,10 @@
 import 'dish.dart';
 
 class Cart {
-  final Map<Dish, int> _dishes;
+  Map<Dish, int> _dishes;
   Map<Dish, int> get dishes => Map<Dish, int>.from(_dishes);
 
-  const Cart() : _dishes = const {};
+  Cart() : _dishes = {};
 
   factory Cart.test() {
     Cart cart = Cart();

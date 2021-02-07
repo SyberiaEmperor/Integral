@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:integral/UI/auth/widgets/letter_node.dart';
 
 class Pin4SymInputField extends StatelessWidget {
-
+//TODO: ПОДУМАТЬ НАД АВТОМАТИЗАЦИЕЙ ОТРИСОВКИ
+//TODO: УПРАСТИТЬ УДАЛЕНИЕ СИМВОЛОВ
   final PinController controller;
 
   final FocusNode first = FocusNode();
@@ -10,9 +11,11 @@ class Pin4SymInputField extends StatelessWidget {
   final FocusNode third = FocusNode();
   final FocusNode fourth = FocusNode();
 
-  Pin4SymInputField(this.controller,{Key key,}) : super(key: key)
-  {
-    if(controller.pinSymbols<4) throw UnimplementedError();
+  Pin4SymInputField(
+    this.controller, {
+    Key key,
+  }) : super(key: key) {
+    if (controller.pinSymbols < 4) throw UnimplementedError();
   }
 
   @override
@@ -55,14 +58,13 @@ class Pin4SymInputField extends StatelessWidget {
   }
 }
 
-class PinController
-{
+class PinController {
   final int pinSymbols;
   final List<TextEditingController> controllers;
 
   String get pin => controllers.map((e) => e.text).join();
 
   PinController(this.pinSymbols)
-    : controllers = List.generate(pinSymbols, (index) => TextEditingController());
-
+      : controllers =
+            List.generate(pinSymbols, (index) => TextEditingController());
 }

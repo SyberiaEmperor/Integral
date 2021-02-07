@@ -21,6 +21,7 @@ class LetterNode extends StatelessWidget {
           primaryColor: Color(0xddFA7022),
         ),
         child: TextFormField(
+          controller: controller,
           keyboardType: TextInputType.number,
           focusNode: currentNode,
           textAlign: TextAlign.center,

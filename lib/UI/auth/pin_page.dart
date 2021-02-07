@@ -1,19 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/auth/widgets/pin_input_field.dart';
+import 'package:integral/UI/default_pages/loading_page.dart';
+import 'package:integral/UI/default_pages/warning_snackbar.dart';
+import 'package:integral/UI/main_page/main_page.dart';
+import 'package:integral/blocs/auth_bloc/auth_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:integral/blocs/main_page/mainpage_bloc.dart';
+import 'package:integral/entities/data_repository.dart';
+import 'package:integral/entities/test_dish_controller.dart';
 
 class PinPage extends StatelessWidget {
-  final PinController controller;
+  final PinController controller = PinController(4);
+  final String phone;
 
-  const PinPage({Key key, this.controller}) : super(key: key);
+  PinPage({Key key, this.phone}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Pin4SymInputField(controller),
-      ],
-    ));
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthErrorState) {
+            bottomWarningBar(context, state.caption);
+          }
+          if (state is AuthLoggedInState) {
+            Navigator.popUntil(context, (route) => false);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                          create: (context) => MainPageBloc(
+                            cartController: DataRepository.cartController,
+                            dishController: TestDishController(),
+                          )..add(Update()),
+                          child: MainPage(),
+                        )));
+          }
+        },
+        builder: (context, state) {
+          if (state is AuthMainState) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Pin4SymInputField(controller),
+                FlatButton(
+                  onPressed: () {
+                    BlocProvider.of<AuthBloc>(context).add(AuthSignInEvent(
+                        login: phone, password: controller.pin));
+                  },
+                  child: Text('Подтвердить'),
+                ),
+              ],
+            );
+          }
+          if (state is AuthInProgressState) {
+            return LoadingPage(caption: 'Получение данных');
+          }
+          return Container();
+        },
+      ),
+    );
   }
 }
