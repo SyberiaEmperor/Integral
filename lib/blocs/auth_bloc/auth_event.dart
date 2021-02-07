@@ -10,4 +10,11 @@ class AuthLogInEvent extends AuthEvent {
       : data = AuthData(login: login, password: password);
 }
 
+class AuthSignInEvent extends AuthEvent {
+  final AuthData data;
+
+  AuthSignInEvent({@required String login, @required String password})
+      : data = AuthData(login: login, password: password);
+}
+
 class AuthFirstCheckEvent extends AuthEvent {}
