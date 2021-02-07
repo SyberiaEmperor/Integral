@@ -7,6 +7,10 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'letter_node.dart';
 
 class PhoneInputField extends StatelessWidget {
+  final TextEditingController controller;
+
+  const PhoneInputField({Key key, this.controller}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var maskPhone = MaskTextInputFormatter(mask: '(###)###-##-##');
@@ -21,6 +25,7 @@ class PhoneInputField extends StatelessWidget {
           primaryColor: Color(0xddFA7022),
         ),
         child: TextFormField(
+          controller: controller,
           style: Theme.of(context)
               .accentTextTheme
               .bodyText2

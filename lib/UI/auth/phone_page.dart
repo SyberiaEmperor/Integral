@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/auth/pin_page.dart';
 import 'package:integral/UI/auth/widgets/auth_title.dart';
 import 'package:integral/UI/auth/widgets/phone_input_field.dart';
+import 'package:integral/blocs/auth_bloc/auth_bloc.dart';
 
 class PhonePage extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
@@ -13,9 +15,12 @@ class PhonePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AuthTitle(),
-          PhoneInputField(),
+          PhoneInputField(
+            controller: controller,
+          ),
           FlatButton(
             onPressed: () {
+              BlocProvider.of<AuthBloc>(context).add();
               Navigator.push(
                   context,
                   MaterialPageRoute(
