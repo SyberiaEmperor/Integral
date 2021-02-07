@@ -16,4 +16,10 @@ class TestAuth implements AuthentificationInterface {
     await Future.delayed(Duration(seconds: 1));
     return User.test();
   }
+
+  @override
+  Future<void> sendPassword(String phoneNumber) async {
+    print('Sending');
+    await Future.delayed(Duration(seconds: 1));
+  }
 }
