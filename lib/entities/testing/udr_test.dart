@@ -7,7 +7,6 @@ class UDRTest implements UserDataRepository {
   Future<AuthData> getData() async {
     print('Getting data');
     await Future.delayed(Duration(seconds: 1));
-    assert(data != null);
     return data;
   }
 

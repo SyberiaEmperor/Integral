@@ -46,6 +46,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         signIn: true,
       );
     }
+    if (event is AuthSendPasswordEvent) {
+      _authService.sendPassword(event.phoneNumber);
+    }
     yield AuthMainState();
   }
 
