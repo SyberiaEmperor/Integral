@@ -11,9 +11,11 @@ import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
 
 import 'blocs/main_page/mainpage_bloc.dart';
+import 'entities/auth_data.dart';
 
 void main() {
   Requests.initReqs();
+  Requests.createUser(AuthData(login: '89999999999', password: '1234'));
   runApp(MyApp());
 }
 

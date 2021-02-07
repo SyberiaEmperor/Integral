@@ -1,5 +1,5 @@
 class AppAuthStrings {
-  static const String LOGIN = 'login';
+  static const String LOGIN = 'phone_number';
   static const String PASSWORD = 'password';
 }
 

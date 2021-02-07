@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:integral/entities/auth_data.dart';
 import 'package:integral/entities/dish.dart';
+import 'package:integral/entities/user.dart';
+import 'package:integral/resources/app_strings.dart';
 
 class Requests {
   static const IP = '178.154.255.209:3777';
@@ -7,6 +10,7 @@ class Requests {
 
   static const _DISHES = "/dishes";
   static const _USER = "/user";
+  static const _TOKEN = '/user_token';
 
   static const TIMEOUT = 5000;
 
@@ -21,6 +25,28 @@ class Requests {
     _baseDio.options.contentType = Headers.jsonContentType;
   }
 
+//TODO: Wrap with try-catch DioErrors
+  static Future<User> logIn(AuthData data) async {
+    Response response =
+        await _baseDio.post(_TOKEN, data: {'auth': data.toJson()});
+    print(response.data);
+  }
+
+//TODO: Wrap with try-catch DioErrors
+  static Future<User> createUser(AuthData data) async {
+    Response response = await _baseDio.post(
+      _USER,
+      data: {
+        'user': {
+          AppAuthStrings.LOGIN: data.login,
+          AppAuthStrings.PASSWORD: data.password,
+        },
+      },
+    );
+    print(response);
+  }
+
+//TODO: Wrap with try-catch DioErrors
   static Future<List<Dish>> getDishes() async {
     String path = buildPathForBaseUri([_DISHES]);
 
