@@ -12,12 +12,16 @@ import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {
+  final TextEditingController search = TextEditingController();
+
   void unfocus(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }
 
   @override
   Widget build(BuildContext context) {
+    var mainBloc = BlocProvider.of<MainPageBloc>(context);
+
     return SafeArea(
       child: GestureDetector(
         onTap: () => unfocus(context),
@@ -55,7 +59,12 @@ class MainPage extends StatelessWidget {
                           flexibleSpace: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Search(),
+                              Search(
+                                controller: search,
+                                onEditingComplete: () {
+                                  mainBloc.add(SearchEvent(search.text));
+                                },
+                              ),
                               SizedBox(height: ResponsiveSize.height(24)),
                               Categories(
                                 categories: Category.values,
