@@ -6,7 +6,9 @@ class LetterNode extends StatelessWidget {
   final FocusNode currentNode;
   final FocusNode nextNode;
 
-  const LetterNode({this.currentNode, this.nextNode});
+  final TextEditingController controller;
+
+  const LetterNode({this.currentNode, this.nextNode, this.controller});
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/auth/widgets/letter_node.dart';
 
-class PinInputField extends StatelessWidget {
-  FocusNode first = FocusNode();
-  FocusNode second = FocusNode();
-  FocusNode third = FocusNode();
-  FocusNode fourth = FocusNode();
+class Pin4SymInputField extends StatelessWidget {
+
+  final PinController controller;
+
+  final FocusNode first = FocusNode();
+  final FocusNode second = FocusNode();
+  final FocusNode third = FocusNode();
+  final FocusNode fourth = FocusNode();
+
+  Pin4SymInputField(this.controller,{Key key,}) : super(key: key)
+  {
+    if(controller.pinSymbols<4) throw UnimplementedError();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +22,7 @@ class PinInputField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           LetterNode(
+            controller: controller.controllers[0],
             currentNode: first,
             nextNode: second,
           ),
@@ -21,6 +30,7 @@ class PinInputField extends StatelessWidget {
             width: 50,
           ),
           LetterNode(
+            controller: controller.controllers[1],
             currentNode: second,
             nextNode: third,
           ),
@@ -28,6 +38,7 @@ class PinInputField extends StatelessWidget {
             width: 50,
           ),
           LetterNode(
+            controller: controller.controllers[2],
             currentNode: third,
             nextNode: fourth,
           ),
@@ -35,10 +46,23 @@ class PinInputField extends StatelessWidget {
             width: 50,
           ),
           LetterNode(
+            controller: controller.controllers[3],
             currentNode: fourth,
           ),
         ],
       ),
     );
   }
+}
+
+class PinController
+{
+  final int pinSymbols;
+  final List<TextEditingController> controllers;
+
+  String get pin => controllers.map((e) => e.text).join();
+
+  PinController(this.pinSymbols)
+    : controllers = List.generate(pinSymbols, (index) => TextEditingController());
+
 }
