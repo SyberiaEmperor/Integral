@@ -4,7 +4,7 @@ class Cart {
   final Map<Dish, int> _dishes;
   Map<Dish, int> get dishes => Map<Dish, int>.from(_dishes);
 
-  Cart() : _dishes = Map<Dish, int>();
+  const Cart() : _dishes = const {};
 
   factory Cart.test() {
     Cart cart = Cart();

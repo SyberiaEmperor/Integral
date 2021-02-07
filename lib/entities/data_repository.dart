@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:integral/entities/test_cart_controller.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/models/cart_controller.dart';
@@ -9,7 +10,7 @@ class DataRepository {
   static User get user => _user;
   static CartController get cartController => _cartController;
 
-  static void init({User user}) {
+  static void init({@required User user}) {
     assert(_user == null && user != null);
     assert(_cartController == null);
 
