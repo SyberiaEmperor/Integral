@@ -6,5 +6,5 @@ class AppAuthStrings {
 class AppUserStrings {
   static const String ID = 'id';
   static const String PHONE = 'phone';
-  static const String TOKEN = 'token';
+  static const String TOKEN = 'jwt';
 }

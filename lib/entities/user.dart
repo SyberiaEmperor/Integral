@@ -19,8 +19,8 @@ class User {
   }
 
   factory User.fromJson(Map<String, String> data) {
-    String id = data[AppUserStrings.ID];
-    String phone = data[AppUserStrings.PHONE];
+    String id = data[AppUserStrings.ID] ?? '';
+    String phone = data[AppUserStrings.PHONE] ?? '';
     String token = data[AppUserStrings.TOKEN];
     return User(id: id, phone: phone, token: token);
   }

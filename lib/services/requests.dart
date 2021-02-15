@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:dio/dio.dart';
 import 'package:integral/entities/auth_data.dart';
 import 'package:integral/entities/dish.dart';
@@ -30,6 +32,9 @@ class Requests {
     Response response =
         await _baseDio.post(_TOKEN, data: {'auth': data.toJson()});
     print(response.data);
+    if (response.statusCode == HttpStatus.created) {
+      return User.fromJson(response.data);
+    }
   }
 
 //TODO: Wrap with try-catch DioErrors
@@ -43,7 +48,9 @@ class Requests {
         },
       },
     );
-    print(response);
+    if (response.statusCode == HttpStatus.created) {
+      return User.fromJson(response.data);
+    }
   }
 
 //TODO: Wrap with try-catch DioErrors
@@ -52,7 +59,7 @@ class Requests {
 
     Response response = await _baseDio.get(path);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == HttpStatus.created) {
       List<Dish> dishes = [];
       List<dynamic> body = response.data;
       body.forEach((element) {
@@ -60,7 +67,7 @@ class Requests {
       });
       return dishes;
     }
-    if (response.statusCode == 204) {
+    if (response.statusCode == HttpStatus.noContent) {
       return [];
     } else {
       throw RequestException("Ошибка при запросе");
