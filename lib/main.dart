@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/auth/phone_page.dart';
-import 'package:integral/UI/main_page/main_page.dart';
-import 'package:integral/entities/cart.dart';
 import 'package:integral/entities/data_repository.dart';
-import 'package:integral/entities/test_cart_controller.dart';
-import 'package:integral/entities/test_dish_controller.dart';
-import 'package:integral/entities/testing/auth_test.dart';
 import 'package:integral/entities/testing/udr_test.dart';
 import 'package:integral/entities/user.dart';
+import 'package:integral/services/dio_authenticator.dart';
 import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
 
 import 'blocs/auth_bloc/auth_bloc.dart';
-import 'blocs/main_page/mainpage_bloc.dart';
-import 'entities/auth_data.dart';
 
+// Requests.createUser(AuthData(login: '89999999999', password: '1234'));
 void main() {
-  Requests.initReqs();
-  Requests.createUser(AuthData(login: '89999999999', password: '1234'));
   runApp(MyApp());
+  Requests.initReqs();
 }
 
 class MyApp extends StatelessWidget {
@@ -81,14 +75,12 @@ class MyApp extends StatelessWidget {
       title: 'Integral',
       theme: ThemeData(),
       home: Builder(builder: (context) {
-        //TODO:Временно для тестов
         DataRepository.init(user: User.test());
-        //TODO:
-        //Requests.initReqs();
+        Requests.initReqs();
         return BlocProvider(
           create: (context) => AuthBloc(
             UDRTest(),
-            TestAuth(),
+            DioAuthenticator(),
           )..add(AuthFirstCheckEvent()),
           child: PhonePage(),
         );

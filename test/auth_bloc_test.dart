@@ -13,7 +13,7 @@ void main() {
       UserDataRepository udr = UDRTest();
       AuthentificationInterface authService = TestAuth();
       AuthBloc authBloc = AuthBloc(udr, authService);
-      expect(authBloc.state.runtimeType, AuthMainState);
+      expect(authBloc.state, isInstanceOf<AuthMainState>());
     },
   );
   test(
@@ -25,7 +25,7 @@ void main() {
       authBloc.add(AuthLogInEvent(login: '', password: ''));
       authBloc.listen(
         (state) {
-          expect(state.runtimeType, AuthInProgressState);
+          expect(state, isInstanceOf<AuthInProgressState>());
         },
       );
     },
@@ -60,7 +60,7 @@ void main() {
       authBloc.add(AuthFirstCheckEvent());
       var expectedState = authBloc.skip(1).last;
       expectedState.then(
-        (state) => expect(state.runtimeType, AuthLoggedInState),
+        (state) => expect(state, isInstanceOf<AuthLoggedInState>()),
       );
     },
   );
