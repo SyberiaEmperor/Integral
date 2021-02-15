@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:integral/models/order.dart';
+import 'package:integral/entities/api/order_to_api.dart';
 
 void main() {
   test("testing JsonConverting", () {
