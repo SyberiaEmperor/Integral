@@ -30,6 +30,8 @@ class OrderDish {
   final Dish dish;
   final int quantity;
 
+  int get fullPrice => dish.price * quantity;
+
   OrderDish._({@required this.dish, @required this.quantity});
   factory OrderDish.fromString(Map<String, dynamic> data) {
     int quantity = data[ApiStrings.ORDER_QUEUE];

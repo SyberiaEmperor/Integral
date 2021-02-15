@@ -9,7 +9,7 @@ class Order {
     double price = 0.0;
 
     dishes.forEach((key, value) {
-      price += key.price * dishes[key];
+      price += key.price * value;
     });
 
     return price;
