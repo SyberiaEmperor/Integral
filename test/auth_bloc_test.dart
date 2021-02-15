@@ -11,7 +11,7 @@ void main() {
     'Initialization',
     () {
       UserDataRepository udr = UDRTest();
-      AuthentificationInterface authService = TestAuth();
+      Authenticator authService = TestAuth();
       AuthBloc authBloc = AuthBloc(udr, authService);
       expect(authBloc.state, isInstanceOf<AuthMainState>());
     },
@@ -20,7 +20,7 @@ void main() {
     'On event',
     () {
       UserDataRepository udr = UDRTest();
-      AuthentificationInterface authService = TestAuth();
+      Authenticator authService = TestAuth();
       AuthBloc authBloc = AuthBloc(udr, authService);
       authBloc.add(AuthLogInEvent(login: '', password: ''));
       authBloc.listen(
@@ -36,7 +36,7 @@ void main() {
       String login = 'login';
       String password = 'password';
       UserDataRepository udr = UDRTest();
-      AuthentificationInterface authService = TestAuth();
+      Authenticator authService = TestAuth();
       AuthBloc authBloc = AuthBloc(udr, authService);
       authBloc.listen((state) async {
         if (state is AuthLoggedInState) {
@@ -55,7 +55,7 @@ void main() {
       String password = 'password';
       UserDataRepository udr = UDRTest();
       udr.setData(AuthData(login: login, password: password));
-      AuthentificationInterface authService = TestAuth();
+      Authenticator authService = TestAuth();
       AuthBloc authBloc = AuthBloc(udr, authService);
       authBloc.add(AuthFirstCheckEvent());
       var expectedState = authBloc.skip(1).last;

@@ -1,15 +1,15 @@
-import 'dish.dart';
+import 'package:integral/entities/order_dish.dart';
 
 class Order {
-  final Map<Dish, int> dishes;
+  final List<OrderDish> dishes;
 
   Order(this.dishes);
 
   double getPrice() {
     double price = 0.0;
 
-    dishes.forEach((key, value) {
-      price += key.price * value;
+    dishes.forEach((value) {
+      price += value.fullPrice;
     });
 
     return price;

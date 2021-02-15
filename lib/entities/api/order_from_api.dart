@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:integral/entities/dish.dart';
+import 'package:integral/entities/order_dish.dart';
 import 'package:integral/resources/app_strings.dart';
 
 class OrderFromApi {
@@ -26,20 +27,6 @@ class OrderFromApi {
   }
 }
 
-class OrderDish {
-  final Dish dish;
-  final int quantity;
-
-  int get fullPrice => dish.price * quantity;
-
-  OrderDish._({@required this.dish, @required this.quantity});
-  factory OrderDish.fromString(Map<String, dynamic> data) {
-    int quantity = data[ApiStrings.ORDER_QUEUE];
-    Dish dish = data[ApiStrings.DISH];
-    return OrderDish._(dish: dish, quantity: quantity);
-  }
-}
-
 class FullOrder extends OrderFromApi {
   final List<OrderDish> dishes;
 
@@ -52,7 +39,7 @@ class FullOrder extends OrderFromApi {
         (data[ApiStrings.ORDER_DISHES] as List<Map<String, dynamic>>);
     List<OrderDish> dishes = orderDishesData.map(
       (orderDish) {
-        return OrderDish.fromString(orderDish);
+        return OrderDish.fromJson(orderDish);
       },
     );
     return FullOrder(order: order, dishes: dishes);

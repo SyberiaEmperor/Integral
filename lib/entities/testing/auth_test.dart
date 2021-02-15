@@ -3,7 +3,7 @@ import 'package:integral/entities/auth_data.dart';
 import 'package:integral/models/authentification.dart';
 import 'package:integral/utils/exceptions/auth_exceptions.dart';
 
-class TestAuth implements AuthentificationInterface {
+class TestAuth implements Authenticator {
   @override
   Future<User> logIn(AuthData data) async {
     print('Loggin in');

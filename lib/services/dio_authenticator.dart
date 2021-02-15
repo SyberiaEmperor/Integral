@@ -3,7 +3,7 @@ import 'package:integral/entities/auth_data.dart';
 import 'package:integral/models/authentification.dart';
 import 'package:integral/services/requests.dart';
 
-class DioAuthenticator implements AuthentificationInterface {
+class DioAuthenticator implements Authenticator {
   @override
   Future<User> logIn(AuthData data) {
     return Requests.logIn(data);
