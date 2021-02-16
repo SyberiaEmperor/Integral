@@ -46,4 +46,12 @@ class Cart {
     }
     return result;
   }
+
+  int get totalPrice {
+    int price = 0;
+    _dishes.forEach((dish, count) {
+      price += dish.price * count;
+    });
+    return price;
+  }
 }

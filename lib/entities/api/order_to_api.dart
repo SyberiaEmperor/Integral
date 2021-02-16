@@ -1,11 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:integral/resources/app_strings.dart';
 
+import '../dish.dart';
+
 class OrderToApi {
   final double totalPrice;
   final List<OrderItemToApi> items;
 
   OrderToApi({@required this.totalPrice, @required this.items});
+
+  factory OrderToApi.fromCart(Map<Dish, int> dishes, double totalPrice) {
+    List<OrderItemToApi> items = [];
+    dishes.forEach(
+      (
+        dish,
+        quantity,
+      ) {
+        items.add(OrderItemToApi(dishId: dish.id, quantity: quantity));
+      },
+    );
+    return OrderToApi(items: items, totalPrice: totalPrice);
+  }
 
   Map<String, dynamic> toJson() {
     return {

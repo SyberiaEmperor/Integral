@@ -7,7 +7,7 @@ import 'package:integral/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/data_repository.dart';
-import 'package:integral/entities/test_dish_controller.dart';
+import 'package:integral/entities/testing/test_dish_controller.dart';
 
 class PinPage extends StatelessWidget {
   final PinController controller = PinController(4);

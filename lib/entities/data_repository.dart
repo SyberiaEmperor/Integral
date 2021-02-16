@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:integral/entities/test_cart_controller.dart';
+import 'package:integral/entities/testing/test_cart_controller.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/models/cart_controller.dart';
 
