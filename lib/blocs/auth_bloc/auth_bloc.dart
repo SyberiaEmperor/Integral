@@ -58,7 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     bool signIn = false,
   }) async {
     try {
-      var authMethod = signIn ? _authService.signIn : _authService.logIn;
+      var authMethod = _authService.logIn;
       User user = await authMethod(data);
       //TODO: Not tne best place for this. Need to be changed.
       DataRepository.init(user: user);

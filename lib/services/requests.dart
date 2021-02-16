@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:integral/entities/api/order_to_api.dart';
 import 'package:integral/entities/auth_data.dart';
 import 'package:integral/entities/dish.dart';
-import 'package:integral/entities/testing/test_strings.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/resources/app_strings.dart';
+import 'package:integral/utils/exceptions/auth_exceptions.dart';
 
 class Requests {
   static const IP = '178.154.255.209:3777';
@@ -47,41 +47,47 @@ class Requests {
     );
   }
 
-//TODO: Wrap with try-catch DioErrors
   static Future<User> logIn(AuthData data) async {
-    Response response =
-        await _baseDio.post(_TOKEN, data: {'auth': data.toJson()});
-    print(response.data);
-    if (response.statusCode == HttpStatus.created) {
-      //TODO: Remove _jwt ?
-      _jwt = response.data[AppUserStrings.TOKEN];
-      initJwt();
-      return User.fromJson(response.data);
+    try {
+      Response response =
+          await _baseDio.post(_TOKEN, data: {'auth': data.toJson()});
+      print(response.data);
+      if (response.statusCode == HttpStatus.created) {
+        //TODO: Remove _jwt ?
+        _jwt = response.data[AppUserStrings.TOKEN];
+        initJwt();
+        return User.fromJson(Map<String, String>.from(response.data));
+      }
+    } on DioError catch (error) {
+      throw AuthException(error.message);
     }
   }
 
-//TODO: Wrap with try-catch DioErrors
   static Future<User> createUser(AuthData data) async {
-    Response response = await _baseDio.post(
-      _USER,
-      data: {
-        'user': {
-          AppAuthStrings.LOGIN: data.login,
-          AppAuthStrings.PASSWORD: data.password,
+    try {
+      Response response = await _baseDio.post(
+        _USER,
+        data: {
+          'user': {
+            AppAuthStrings.LOGIN: data.login,
+            AppAuthStrings.PASSWORD: data.password,
+          },
         },
-      },
-    );
-    if (response.statusCode == HttpStatus.created) {
-      //TODO: Remove _jwt ?
-      _jwt = response.data[AppUserStrings.TOKEN];
-      initJwt();
-      return User.fromJson(response.data);
+      );
+      if (response.statusCode == HttpStatus.created) {
+        //TODO: Remove _jwt ?
+        _jwt = response.data[AppUserStrings.TOKEN];
+        initJwt();
+        return User.fromJson(response.data);
+      }
+    } on DioError catch (error) {
+      throw AuthException(error.message);
     }
   }
 
   static Future<bool> createOrder(OrderToApi order) async {
     Response response = await _jwtDio.post(_ORDERS, data: order.toJson());
-    print(response);
+    return response.statusCode == HttpStatus.ok;
   }
 
 //TODO: Wrap with try-catch DioErrors
@@ -90,7 +96,7 @@ class Requests {
 
     Response response = await _baseDio.get(path);
 
-    if (response.statusCode == HttpStatus.created) {
+    if (response.statusCode == HttpStatus.ok) {
       List<Dish> dishes = [];
       List<dynamic> body = response.data;
       body.forEach((element) {

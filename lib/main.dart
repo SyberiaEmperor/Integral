@@ -75,9 +75,6 @@ class MyApp extends StatelessWidget {
       title: 'Integral',
       theme: ThemeData(),
       home: Builder(builder: (context) {
-        DataRepository.init(
-          user: User.test(),
-        );
         Requests.initReqs();
         return BlocProvider(
           create: (context) => AuthBloc(

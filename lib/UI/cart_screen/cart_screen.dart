@@ -101,6 +101,7 @@ class CartScreen extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         print('<<<Order>>>');
+                        cartBloc.add(PurchaseEvent());
                       },
                       child: Container(
                         width: ResponsiveSize.width(200),
