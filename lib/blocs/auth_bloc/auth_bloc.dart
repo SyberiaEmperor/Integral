@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:integral/entities/auth_data.dart';
+import 'package:integral/entities/data_repository.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/entities/user_repository.dart';
 import 'package:integral/models/authentification.dart';
@@ -59,6 +60,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       var authMethod = signIn ? _authService.signIn : _authService.logIn;
       User user = await authMethod(data);
+      //TODO: Not tne best place for this. Need to be changed.
+      DataRepository.init(user: user);
+
       UserRepository.setUser(user);
       _udr.setData(data);
       return AuthLoggedInState();

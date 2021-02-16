@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:integral/blocs/cart_bloc/cart_bloc.dart' as cart;
-import 'package:integral/blocs/main_page/mainpage_bloc.dart' as main;
 import 'package:integral/entities/data_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:integral/services/dio_order_tool.dart';
 
-import '../../../entities/cart.dart';
 import '../../../services/responsive_size.dart';
 import '../../cart_screen/cart_screen.dart';
 
@@ -17,7 +16,10 @@ class CartAppBarItem extends StatelessWidget {
         onTap: () {
           var page = BlocProvider(
             create: (BuildContext context) => cart.CartBloc(
-                cart.LoadingState("Загрузка"), DataRepository.cartController),
+              cart.LoadingState("Загрузка"),
+              DataRepository.cartController,
+              DioOrderTool(),
+            ),
             child: CartScreen(),
           );
           Navigator.push(

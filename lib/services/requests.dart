@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:integral/entities/api/order_to_api.dart';
 import 'package:integral/entities/auth_data.dart';
 import 'package:integral/entities/dish.dart';
+import 'package:integral/entities/testing/test_strings.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/resources/app_strings.dart';
 
@@ -13,10 +15,14 @@ class Requests {
   static const _DISHES = "/dishes";
   static const _USER = "/user";
   static const _TOKEN = '/user_token';
+  static const _ORDERS = '/orders';
 
   static const TIMEOUT = 5000;
 
+  static String _jwt;
+
   static Dio _baseDio;
+  static Dio _jwtDio;
 
   static void initReqs() {
     _baseDio = Dio();
@@ -27,12 +33,29 @@ class Requests {
     _baseDio.options.contentType = Headers.jsonContentType;
   }
 
+  static void initJwt() {
+    _jwtDio = Dio(
+      BaseOptions(
+        baseUrl: BASE_URI,
+        connectTimeout: TIMEOUT,
+        receiveTimeout: TIMEOUT,
+        contentType: Headers.jsonContentType,
+        headers: {
+          DioStrings.AUTH_HEADER: DioStrings.BEARER + _jwt,
+        },
+      ),
+    );
+  }
+
 //TODO: Wrap with try-catch DioErrors
   static Future<User> logIn(AuthData data) async {
     Response response =
         await _baseDio.post(_TOKEN, data: {'auth': data.toJson()});
     print(response.data);
     if (response.statusCode == HttpStatus.created) {
+      //TODO: Remove _jwt ?
+      _jwt = response.data[AppUserStrings.TOKEN];
+      initJwt();
       return User.fromJson(response.data);
     }
   }
@@ -49,8 +72,16 @@ class Requests {
       },
     );
     if (response.statusCode == HttpStatus.created) {
+      //TODO: Remove _jwt ?
+      _jwt = response.data[AppUserStrings.TOKEN];
+      initJwt();
       return User.fromJson(response.data);
     }
+  }
+
+  static Future<bool> createOrder(OrderToApi order) async {
+    Response response = await _jwtDio.post(_ORDERS, data: order.toJson());
+    print(response);
   }
 
 //TODO: Wrap with try-catch DioErrors

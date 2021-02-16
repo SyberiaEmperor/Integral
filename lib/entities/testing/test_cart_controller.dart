@@ -37,11 +37,8 @@ class TestCartController implements CartController {
   Map<Dish, int> get dishes => _cart.dishes;
 
   @override
-  double getTotalPrice() {
-    double total = 0.0;
-    _cart.dishes.forEach((key, value) {
-      total += key.price * value;
-    });
+  double get getTotalPrice {
+    var total = _cart.totalPrice.toDouble();
     return total;
   }
 }

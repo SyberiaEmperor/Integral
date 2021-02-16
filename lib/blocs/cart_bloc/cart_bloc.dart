@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/models/cart_controller.dart';
+import 'package:integral/models/order_tool.dart';
 import 'package:meta/meta.dart';
 import 'package:pedantic/pedantic.dart';
 
@@ -9,11 +10,13 @@ part 'cart_event.dart';
 part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
-  CartBloc(CartState initialState, this.cartController) : super(initialState) {
+  CartBloc(CartState initialState, this.cartController, this.orderTool)
+      : super(initialState) {
     add(UpdateEvent());
   }
 
   final CartController cartController;
+  final OrderTool orderTool;
 
   @override
   Stream<CartState> mapEventToState(
@@ -34,6 +37,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       cartController.removeFromCart(event.dish);
       yield InitialCartState(cartController.dishes);
     }
-    if (event is PurchaseEvent) {}
+    if (event is PurchaseEvent) {
+      orderTool.makeAnOrder(
+          cartController.dishes, cartController.getTotalPrice);
+    }
   }
 }

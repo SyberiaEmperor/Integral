@@ -9,6 +9,11 @@ class AppUserStrings {
   static const String TOKEN = 'jwt';
 }
 
+class DioStrings {
+  static const AUTH_HEADER = 'Authorization';
+  static const BEARER = 'Bearer ';
+}
+
 class ApiStrings {
   ApiStrings._();
   static final TOTAL_PRICE = 'total_price';

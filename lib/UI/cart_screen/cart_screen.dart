@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/cart_screen/widgets/dish_tile.dart';
 import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/blocs/cart_bloc/cart_bloc.dart';
-import 'package:integral/entities/cart.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class CartScreen extends StatelessWidget {
@@ -88,7 +87,7 @@ class CartScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            cartBloc.cartController.getTotalPrice().toString() +
+                            cartBloc.cartController.getTotalPrice.toString() +
                                 'руб',
                             style: TextStyle(
                               fontSize: 20,
