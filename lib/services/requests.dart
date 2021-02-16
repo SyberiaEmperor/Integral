@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/entities/api/order_to_api.dart';
 import 'package:integral/entities/auth_data.dart';
 import 'package:integral/entities/dish.dart';
@@ -88,6 +89,16 @@ class Requests {
   static Future<bool> createOrder(OrderToApi order) async {
     Response response = await _jwtDio.post(_ORDERS, data: order.toJson());
     return response.statusCode == HttpStatus.ok;
+  }
+
+  static Future<List<OrderFromApi>> getAllOrders() async {
+    Response response = await _jwtDio.get(_ORDERS);
+    if (response.statusCode == HttpStatus.ok) {
+      List<OrderFromApi> orders = (response.data as List<dynamic>)
+          .map((data) => OrderFromApi.fromJson(data))
+          .toList();
+      print(orders);
+    }
   }
 
 //TODO: Wrap with try-catch DioErrors

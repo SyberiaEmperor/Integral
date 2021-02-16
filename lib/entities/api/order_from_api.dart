@@ -19,7 +19,7 @@ class OrderFromApi {
 
   factory OrderFromApi.fromJson(Map<String, dynamic> data) {
     int id = data[ApiStrings.ID];
-    String orderQueue = data[ApiStrings.ORDER_QUEUE];
+    String orderQueue = data[ApiStrings.ORDER_QUEUE] ?? '';
     double total = data[ApiStrings.TOTAL_PRICE];
     DateTime createdAt = DateTime.parse(data[ApiStrings.CREATED_AT]);
     return OrderFromApi(

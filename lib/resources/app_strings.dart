@@ -16,7 +16,7 @@ class DioStrings {
 
 class ApiStrings {
   ApiStrings._();
-  static final TOTAL_PRICE = 'total_price';
+  static final TOTAL_PRICE = 'total';
   static final ORDER_DISHES = 'order_dishes';
   static final QUANTITY = 'quantity';
   static final DISH_ID = 'dish_id';

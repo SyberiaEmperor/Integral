@@ -9,6 +9,7 @@ import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/orders_page/orders_page.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/dish.dart';
+import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {
@@ -26,6 +27,9 @@ class MainPage extends StatelessWidget {
       child: GestureDetector(
         onTap: () => unfocus(context),
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => Requests.getAllOrders(),
+          ),
           appBar: AppBar(
               backgroundColor: Theme.of(context).backgroundColor,
               elevation: 0.0,
