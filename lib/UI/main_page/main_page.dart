@@ -7,6 +7,7 @@ import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/orders_page/orders_page.dart';
+import 'package:integral/UI/routes/orders_page_route.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/entities/dish.dart';
@@ -128,18 +129,7 @@ class OrdersPageAppBarLeading extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => OrdersPage(
-                microOrders: [
-                  OrderFromApi(
-                    createdAt: DateTime.now(),
-                    orderQueue: 'OrderQueue',
-                    id: 2,
-                    total: 3,
-                  ),
-                ],
-              ),
-            ),
+            OrdersPageRoute(),
           );
         },
         child: Container(

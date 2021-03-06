@@ -21,7 +21,7 @@ class ApiStrings {
   static const QUANTITY = 'quantity';
   static const DISH_ID = 'dish_id';
   static const CREATED_AT = 'created_at';
-  static const ORDER_QUEUE = 'order_que';
+  static const ORDER_QUEUE = 'order_queue';
   static const ID = AppUserStrings.ID;
   static const DISH = 'dish';
 }

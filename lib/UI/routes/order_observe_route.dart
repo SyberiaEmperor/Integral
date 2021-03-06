@@ -6,19 +6,18 @@ import 'package:integral/entities/full_order_updater.dart';
 import 'package:integral/services/requests.dart';
 
 class OrderObserveRoute extends MaterialPageRoute {
-  static Widget _builder(BuildContext ctx, FullOrder order) => OrderObservePage(
-        order: order,
-      );
-
-  OrderObserveRoute(int orderId,
-      {updatePeriod = const Duration(
-        milliseconds: Requests.TIMEOUT,
-      )})
-      : super(
+  OrderObserveRoute(
+    int orderId, {
+    updatePeriod = const Duration(
+      milliseconds: Requests.TIMEOUT,
+    ),
+  }) : super(
           builder: (context) => ScreenWithUpdater<FullOrder>(
             updatePeriod: updatePeriod,
             updater: FullOrderUpdater(orderId),
-            bodyBuilder: _builder,
+            bodyBuilder: (ctx, order) => OrderObservePage(
+              order: order,
+            ),
           ),
         );
 }

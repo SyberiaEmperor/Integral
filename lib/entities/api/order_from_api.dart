@@ -27,11 +27,15 @@ class OrderFromApi {
   factory OrderFromApi.fromJson(Map<String, dynamic> data) {
     int id = data[ApiStrings.ID];
     String orderQueue = data[ApiStrings.ORDER_QUEUE] ?? '';
-    double total = double.parse(data[ApiStrings.TOTAL_PRICE]);
+    double total = double.parse(data[ApiStrings.TOTAL_PRICE] ?? '-42');
     DateTime createdAt = DateTime.parse(data[ApiStrings.CREATED_AT]);
     return OrderFromApi(
         createdAt: createdAt, id: id, total: total, orderQueue: orderQueue);
   }
+
+  @override
+  String toString() =>
+      '{id: $id, orderQueue: $orderQueue, total: $total, createdAt: $createdAt}';
 }
 
 class FullOrder extends OrderFromApi {
