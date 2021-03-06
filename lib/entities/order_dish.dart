@@ -15,8 +15,8 @@ class OrderDish {
   OrderDish({@required this.dish, @required this.quantity});
 
   factory OrderDish.fromJson(Map<String, dynamic> data) {
-    int quantity = data[ApiStrings.ORDER_QUEUE];
-    Dish dish = data[ApiStrings.DISH];
+    int quantity = data[ApiStrings.QUANTITY];
+    Dish dish = Dish.fromData(data[ApiStrings.DISH]);
     return OrderDish(dish: dish, quantity: quantity);
   }
 }

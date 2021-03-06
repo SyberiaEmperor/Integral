@@ -28,7 +28,7 @@ class MainPage extends StatelessWidget {
         onTap: () => unfocus(context),
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () => Requests.getAllOrders(),
+            onPressed: () => Requests.getOrderById(2),
           ),
           appBar: AppBar(
               backgroundColor: Theme.of(context).backgroundColor,

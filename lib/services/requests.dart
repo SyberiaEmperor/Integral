@@ -101,6 +101,20 @@ class Requests {
     }
   }
 
+  static Future<FullOrder> getOrderById(int id) async {
+    String path = buildPathForBaseUri([_ORDERS, "/", id.toString()]);
+
+    print(path);
+    Response response = await _jwtDio.get(path);
+
+    if (response.statusCode == HttpStatus.ok) {
+      Map<String, dynamic> body = response.data;
+      print(body);
+      return FullOrder.fromJson(body);
+    } else
+      throw RequestException("Такого заказа не существует");
+  }
+
 //TODO: Wrap with try-catch DioErrors
   static Future<List<Dish>> getDishes() async {
     String path = buildPathForBaseUri([_DISHES]);
