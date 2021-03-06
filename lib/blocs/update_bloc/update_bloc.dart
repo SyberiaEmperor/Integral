@@ -42,9 +42,11 @@ class UpdateBloc<DataType> extends Bloc<UpdateEvent, UpdateState> {
 
   @override
   Stream<UpdateState> mapEventToState(
-    UpdateEvent _,
+    UpdateEvent event,
   ) async* {
-    var data = await updater.update();
-    yield UpdateMainState(data);
+    if (event is RunUpdate) {
+      var data = await updater.update();
+      yield UpdateMainState(data);
+    }
   }
 }

@@ -8,6 +8,7 @@ import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/orders_page/orders_page.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
+import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -126,7 +127,20 @@ class OrdersPageAppBarLeading extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => OrdersPage()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => OrdersPage(
+                microOrders: [
+                  OrderFromApi(
+                    createdAt: DateTime.now(),
+                    orderQueue: 'OrderQueue',
+                    id: 2,
+                    total: 3,
+                  ),
+                ],
+              ),
+            ),
+          );
         },
         child: Container(
             height: ResponsiveSize.height(40),

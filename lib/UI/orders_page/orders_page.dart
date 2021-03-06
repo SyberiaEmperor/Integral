@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/orders_page/widgets/order_tile.dart';
 import 'package:integral/UI/widget/back_button.dart';
+import 'package:integral/entities/api/order_from_api.dart';
 
 class OrdersPage extends StatelessWidget {
+  final List<OrderFromApi> microOrders;
+
+  const OrdersPage({Key key, @required this.microOrders}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -14,17 +18,11 @@ class OrdersPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-            OrderTile(),
-          ],
+          children: List<Widget>.from(
+            microOrders.map(
+              (order) => OrderTile(microOrder: order),
+            ),
+          ),
         ),
       ),
     ));

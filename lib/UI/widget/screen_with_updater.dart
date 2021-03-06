@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/default_pages/loading_page.dart';
 import 'package:integral/blocs/update_bloc/update_bloc.dart';
+import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/models/updater.dart';
 
 class ScreenWithUpdater<DataType> extends StatefulWidget {
   final Updater<DataType> updater;
-  final Widget Function(BuildContext, DataType) bodyBuilder;
+  final Widget Function(BuildContext, FullOrder) bodyBuilder;
   final Duration updatePeriod;
 
   const ScreenWithUpdater({
@@ -25,6 +26,11 @@ class _ScreenWithUpdaterState extends State<ScreenWithUpdater> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _bloc = UpdateBloc(
       updatePeriod: widget.updatePeriod,
       updater: widget.updater,
@@ -39,19 +45,22 @@ class _ScreenWithUpdaterState extends State<ScreenWithUpdater> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UpdateBloc, UpdateState>(builder: (
-      ctx,
-      state,
-    ) {
-      if (state is ShowLoader) {
-        return LoadingPage();
-      } else if (state is UpdateMainState) {
-        return widget.bodyBuilder(context, state.data);
-      } else {
-        return Center(
-          child: Text('Something went wrong'),
-        );
-      }
-    });
+    return BlocBuilder<UpdateBloc, UpdateState>(
+      cubit: _bloc,
+      builder: (
+        ctx,
+        state,
+      ) {
+        if (state is ShowLoader) {
+          return LoadingPage();
+        } else if (state is UpdateMainState) {
+          return widget.bodyBuilder(ctx, state.data);
+        } else {
+          return Center(
+            child: Text('Something went wrong'),
+          );
+        }
+      },
+    );
   }
 }
