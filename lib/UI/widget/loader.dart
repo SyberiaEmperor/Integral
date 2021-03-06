@@ -7,7 +7,7 @@ class LoaderWidget extends StatelessWidget {
   ///Color of spinning circle
   final Color color;
   final Color backgroundColor;
-  const LoaderWidget({Key key, @required this.color, this.backgroundColor})
+  const LoaderWidget({Key key, this.color, this.backgroundColor})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

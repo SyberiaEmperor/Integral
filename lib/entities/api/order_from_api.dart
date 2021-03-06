@@ -8,8 +8,13 @@ class OrderFromApi {
   final double total;
   final DateTime createdAt;
 
-  String get createDate =>
-      '${createdAt.hour}:${createdAt.minute} ${createdAt.day}.${createdAt.month}.${createdAt.year}';
+  ///Returns hours and minutes of it's creation in hh:mm format
+  String get creationTime =>
+      '${createdAt.hour.toString().padLeft(2, '0')}:${createdAt.minute.toString().padLeft(2, '0')}';
+
+  ///Return date of it's creation in dd.mm.yyyy format
+  String get creationDate =>
+      '${createdAt.day.toString().padLeft(2, '0')}.${createdAt.month.toString().padLeft(2, '0')}.${createdAt.year}';
 
   OrderFromApi({this.id, this.orderQueue, this.total, this.createdAt});
 

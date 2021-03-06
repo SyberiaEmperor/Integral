@@ -52,15 +52,15 @@ class _ScreenWithUpdaterState extends State<ScreenWithUpdater> {
         ctx,
         state,
       ) {
-        return LoaderWidget();
-        // if (state is ShowLoader) {
-        // } else if (state is UpdateMainState) {
-        //   return widget.bodyBuilder(ctx, state.data);
-        // } else {
-        //   return Center(
-        //     child: Text('Something went wrong'),
-        //   );
-        // }
+        if (state is ShowLoader) {
+          return LoaderWidget();
+        } else if (state is UpdateMainState) {
+          return widget.bodyBuilder(ctx, state.data);
+        } else {
+          return Center(
+            child: Text('Something went wrong'),
+          );
+        }
       },
     );
   }

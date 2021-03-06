@@ -45,7 +45,8 @@ class OrderTile extends StatelessWidget {
                         style: Theme.of(context).primaryTextTheme.bodyText1,
                       ),
                       Text(
-                        microOrder.createDate,
+                        '${microOrder.creationDate}\n${microOrder.creationTime}',
+                        textAlign: TextAlign.center,
                         style: Theme.of(context).accentTextTheme.bodyText1,
                       ),
                     ],
