@@ -1,38 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:integral/resources/app_strings.dart';
+import 'package:integral/services/responsive_size.dart';
 
 ///Shows circled loader.
 class LoaderWidget extends StatelessWidget {
   ///Color of spinning circle
   final Color color;
-
-  const LoaderWidget({Key key, @required this.color}) : super(key: key);
+  final Color backgroundColor;
+  const LoaderWidget({Key key, @required this.color, this.backgroundColor})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var themeData = Theme.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         var width = constraints.maxWidth;
         var height = constraints.maxHeight;
         var circleSize =
-            (width > height ? height : width) * 0.3; // 0.3 of the smallest
-        return Container(
-          height: height,
-          width: width,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: circleSize,
-                width: circleSize,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(color),
-                  strokeWidth: 5.0,
+            (width > height ? height : width) * 0.1; // 0.3 of the smallest
+        return Theme(
+          data: themeData,
+          child: Container(
+            height: height,
+            width: width,
+            color: backgroundColor ?? themeData.backgroundColor,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(
+                    ResponsiveSize.width(15),
+                  ),
+                  child: Text(
+                    AppLabelStrings.LOADER_LABEL,
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    style: themeData.textTheme.bodyText2,
+                  ),
                 ),
-              ),
-              Text(AppLabelStrings.LOADER_LABEL),
-            ],
+                SizedBox(
+                  height: circleSize,
+                  width: circleSize,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5.0,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

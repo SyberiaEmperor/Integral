@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/default_pages/loading_page.dart';
+import 'package:integral/UI/widget/loader.dart';
 import 'package:integral/blocs/update_bloc/update_bloc.dart';
 import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/models/updater.dart';
@@ -51,15 +52,15 @@ class _ScreenWithUpdaterState extends State<ScreenWithUpdater> {
         ctx,
         state,
       ) {
-        if (state is ShowLoader) {
-          return LoadingPage();
-        } else if (state is UpdateMainState) {
-          return widget.bodyBuilder(ctx, state.data);
-        } else {
-          return Center(
-            child: Text('Something went wrong'),
-          );
-        }
+        return LoaderWidget();
+        // if (state is ShowLoader) {
+        // } else if (state is UpdateMainState) {
+        //   return widget.bodyBuilder(ctx, state.data);
+        // } else {
+        //   return Center(
+        //     child: Text('Something went wrong'),
+        //   );
+        // }
       },
     );
   }

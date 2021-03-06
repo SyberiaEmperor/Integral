@@ -28,5 +28,5 @@ class ApiStrings {
 
 class AppLabelStrings {
   static const LOADER_LABEL =
-      'Происходит обновление данных. Пожалуйста, подождите';
+      'Происходит обновление данных.\nПожалуйста, подождите';
 }
