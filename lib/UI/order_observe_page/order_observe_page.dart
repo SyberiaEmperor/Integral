@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:integral/UI/widget/back_button.dart';
+import 'package:integral/entities/api/order_from_api.dart';
 
 class OrderObservePage extends StatelessWidget {
+  final FullOrder order;
+
+  const OrderObservePage({Key key, this.order}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,19 +20,19 @@ class OrderObservePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'ЗАКАЗ #11111111',
+              'ЗАКАЗ #${order.id}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              'Цена 1500р',
+              'Цена: ${order.total}р',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              'Дата 21.01.2020',
+              'Дата: ${order.createdAt}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             Text(
-              'Статус НЕИЗВЕСТНО',
+              'Статус: ${order.orderQueue}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ],

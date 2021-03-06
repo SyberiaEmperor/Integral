@@ -44,4 +44,23 @@ class FullOrder extends OrderFromApi {
     );
     return FullOrder(order: order, dishes: dishes);
   }
+
+  factory FullOrder.testOrder() {
+    var orderDishes = [
+      OrderDish(dish: Dish.testDish(), quantity: 5),
+      OrderDish(dish: Dish.testDish2(), quantity: 3),
+      OrderDish(dish: Dish.testDish3(), quantity: 1),
+    ];
+
+    OrderFromApi order = OrderFromApi(
+        id: 1,
+        createdAt: DateTime.now(),
+        orderQueue: "НЕИЗВЕСТНО",
+        total: 100.5);
+
+    return FullOrder(
+      order: order,
+      dishes: orderDishes,
+    );
+  }
 }
