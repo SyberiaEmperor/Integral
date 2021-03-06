@@ -16,12 +16,17 @@ class DioStrings {
 
 class ApiStrings {
   ApiStrings._();
-  static final TOTAL_PRICE = 'total';
-  static final ORDER_DISHES = 'order_dishes';
-  static final QUANTITY = 'quantity';
-  static final DISH_ID = 'dish_id';
-  static final CREATED_AT = 'created_at';
-  static final ORDER_QUEUE = 'order_que';
-  static final ID = AppUserStrings.ID;
-  static final DISH = 'dish';
+  static const TOTAL_PRICE = 'total';
+  static const ORDER_DISHES = 'order_dishes';
+  static const QUANTITY = 'quantity';
+  static const DISH_ID = 'dish_id';
+  static const CREATED_AT = 'created_at';
+  static const ORDER_QUEUE = 'order_que';
+  static const ID = AppUserStrings.ID;
+  static const DISH = 'dish';
+}
+
+class AppLabelStrings {
+  static const LOADER_LABEL =
+      'Происходит обновление данных. Пожалуйста, подождите';
 }
