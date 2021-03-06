@@ -20,7 +20,7 @@ class OrderFromApi {
   factory OrderFromApi.fromJson(Map<String, dynamic> data) {
     int id = data[ApiStrings.ID];
     String orderQueue = data[ApiStrings.ORDER_QUEUE] ?? '';
-    double total = data[ApiStrings.TOTAL_PRICE];
+    double total = double.parse(data[ApiStrings.TOTAL_PRICE]);
     DateTime createdAt = DateTime.parse(data[ApiStrings.CREATED_AT]);
     return OrderFromApi(
         createdAt: createdAt, id: id, total: total, orderQueue: orderQueue);
@@ -35,13 +35,14 @@ class FullOrder extends OrderFromApi {
   @override
   factory FullOrder.fromJson(Map<String, dynamic> data) {
     var order = OrderFromApi.fromJson(data);
-    var orderDishesData =
-        (data[ApiStrings.ORDER_DISHES] as List<Map<String, dynamic>>);
+    List<dynamic> orderDishesData =
+        List.castFrom(data[ApiStrings.ORDER_DISHES]);
+    var dish = OrderDish.fromJson(orderDishesData.first);
     List<OrderDish> dishes = orderDishesData.map(
       (orderDish) {
         return OrderDish.fromJson(orderDish);
       },
-    );
+    ).toList();
     return FullOrder(order: order, dishes: dishes);
   }
 
