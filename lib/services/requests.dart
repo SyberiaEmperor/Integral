@@ -20,8 +20,6 @@ class Requests {
 
   static const TIMEOUT = 5000;
 
-  static String _jwt;
-
   static Dio _baseDio;
   static Dio _jwtDio;
 
@@ -34,7 +32,7 @@ class Requests {
     _baseDio.options.contentType = Headers.jsonContentType;
   }
 
-  static void initJwt() {
+  static void initJwt(String jwt) {
     _jwtDio = Dio(
       BaseOptions(
         baseUrl: BASE_URI,
@@ -42,7 +40,7 @@ class Requests {
         receiveTimeout: TIMEOUT,
         contentType: Headers.jsonContentType,
         headers: {
-          DioStrings.AUTH_HEADER: DioStrings.BEARER + _jwt,
+          DioStrings.AUTH_HEADER: DioStrings.BEARER + jwt,
         },
       ),
     );
@@ -55,8 +53,8 @@ class Requests {
       print(response.data);
       if (response.statusCode == HttpStatus.created) {
         //TODO: Remove _jwt ?
-        _jwt = response.data[AppUserStrings.TOKEN];
-        initJwt();
+        var jwt = response.data[AppUserStrings.TOKEN];
+        initJwt(jwt);
         return User.fromJson(Map<String, String>.from(response.data));
       }
     } on DioError catch (error) {
@@ -77,8 +75,8 @@ class Requests {
       );
       if (response.statusCode == HttpStatus.created) {
         //TODO: Remove _jwt ?
-        _jwt = response.data[AppUserStrings.TOKEN];
-        initJwt();
+        var _jwt = response.data[AppUserStrings.TOKEN];
+        initJwt(_jwt);
         return User.fromJson(response.data);
       }
     } on DioError catch (error) {
@@ -98,7 +96,9 @@ class Requests {
           .map((data) => OrderFromApi.fromJson(data))
           .toList();
       print(orders);
+      return orders;
     }
+    throw RequestException("Ошибка во время получения заказов");
   }
 
   static Future<FullOrder> getOrderById(int id) async {
@@ -111,8 +111,9 @@ class Requests {
       Map<String, dynamic> body = response.data;
       print(body);
       return FullOrder.fromJson(body);
-    } else
+    } else {
       throw RequestException("Такого заказа не существует");
+    }
   }
 
 //TODO: Wrap with try-catch DioErrors

@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:integral/UI/order_observe_page/order_observe_page.dart';
+import 'package:integral/UI/routes/order_observe_route.dart';
 import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class OrderTile extends StatelessWidget {
+  final OrderFromApi microOrder;
+
+  const OrderTile({Key key, @required this.microOrder}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => OrderObservePage(
-                      order: FullOrder.testOrder(),
-                    )));
+        Navigator.push(context, OrderObserveRoute(microOrder.id));
       },
       child: Container(
         height: ResponsiveSize.height(60),
@@ -43,15 +41,19 @@ class OrderTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Заказ#2151512',
+                        'Заказ#${microOrder.id}',
                         style: Theme.of(context).primaryTextTheme.bodyText1,
                       ),
-                      Text('21.01.2020',
-                          style: Theme.of(context).accentTextTheme.bodyText1),
+                      Text(
+                        microOrder.createDate,
+                        style: Theme.of(context).accentTextTheme.bodyText1,
+                      ),
                     ],
                   ),
-                  Text('Какой-то текст',
-                      style: Theme.of(context).accentTextTheme.bodyText1),
+                  Text(
+                    'Какой-то текст',
+                    style: Theme.of(context).accentTextTheme.bodyText1,
+                  ),
                 ],
               ),
             ),

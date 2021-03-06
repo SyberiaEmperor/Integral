@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/entities/order_dish.dart';
 import 'package:integral/resources/app_strings.dart';
@@ -8,6 +7,9 @@ class OrderFromApi {
   final String orderQueue;
   final double total;
   final DateTime createdAt;
+
+  String get createDate =>
+      '${createdAt.hour}:${createdAt.minute} ${createdAt.day}.${createdAt.month}.${createdAt.year}';
 
   OrderFromApi({this.id, this.orderQueue, this.total, this.createdAt});
 

@@ -7,13 +7,33 @@ import 'package:meta/meta.dart';
 part 'update_event.dart';
 part 'update_state.dart';
 
+///Runs [updater] every [updatePeriod]
 class UpdateBloc<DataType> extends Bloc<UpdateEvent, UpdateState> {
-  UpdateBloc(this.updater) : super(ShowLoader()) {
-    update();
+  ///An implementation of updater interface. Need to update values
+  final Updater<DataType> updater;
+
+  ///Cycle time
+  final Duration updatePeriod;
+
+  Timer _updaterTimer;
+
+  UpdateBloc({@required this.updater, @required this.updatePeriod})
+      : super(ShowLoader()) {
+    _init();
   }
 
-  ///An implementation of updater interface. Need to update values
-  Updater<DataType> updater;
+  void _init() {
+    update();
+    _updaterTimer = Timer.periodic(updatePeriod, (timer) {
+      update();
+    });
+  }
+
+  @override
+  Future<void> close() {
+    _updaterTimer.cancel();
+    return super.close();
+  }
 
   ///Runs update function of updater.
   void update() {
