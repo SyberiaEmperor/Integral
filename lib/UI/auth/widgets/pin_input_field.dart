@@ -3,7 +3,6 @@ import 'package:integral/UI/auth/widgets/letter_node.dart';
 
 class Pin4SymInputField extends StatelessWidget {
 //TODO: ПОДУМАТЬ НАД АВТОМАТИЗАЦИЕЙ ОТРИСОВКИ
-//TODO: УПРАСТИТЬ УДАЛЕНИЕ СИМВОЛОВ
   final PinController controller;
 
   final FocusNode first = FocusNode();
@@ -34,6 +33,7 @@ class Pin4SymInputField extends StatelessWidget {
           ),
           LetterNode(
             controller: controller.controllers[1],
+            prevNode: first,
             currentNode: second,
             nextNode: third,
           ),
@@ -42,6 +42,7 @@ class Pin4SymInputField extends StatelessWidget {
           ),
           LetterNode(
             controller: controller.controllers[2],
+            prevNode: second,
             currentNode: third,
             nextNode: fourth,
           ),
@@ -50,6 +51,7 @@ class Pin4SymInputField extends StatelessWidget {
           ),
           LetterNode(
             controller: controller.controllers[3],
+            prevNode: third,
             currentNode: fourth,
           ),
         ],

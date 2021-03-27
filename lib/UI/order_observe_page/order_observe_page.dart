@@ -35,7 +35,7 @@ class OrderObservePage extends StatelessWidget {
           children: [
             NameValueMapOrderBox(
               name: 'Цена:',
-              value: '${order.total}',
+              value: order.total.toStringAsFixed(0) + ' руб.',
               nameStyle: nameStyle,
               valueStyle: valueStyle,
             ),

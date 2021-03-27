@@ -3,12 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:integral/services/responsive_size.dart';
 
 class LetterNode extends StatelessWidget {
+  final FocusNode prevNode;
   final FocusNode currentNode;
   final FocusNode nextNode;
 
   final TextEditingController controller;
 
-  const LetterNode({this.currentNode, this.nextNode, this.controller});
+  const LetterNode(
+      {this.currentNode, this.nextNode, this.controller, this.prevNode});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,9 @@ class LetterNode extends StatelessWidget {
             if (value.isNotEmpty) {
               currentNode.unfocus();
               FocusScope.of(context).requestFocus(nextNode);
+            } else {
+              currentNode.unfocus();
+              FocusScope.of(context).requestFocus(prevNode);
             }
           },
           style: Theme.of(context)
