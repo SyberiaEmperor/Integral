@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/auth/phone_page.dart';
-import 'package:integral/entities/data_repository.dart';
 import 'package:integral/entities/testing/udr_test.dart';
-import 'package:integral/entities/user.dart';
 import 'package:integral/services/dio_authenticator.dart';
 import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -26,7 +24,6 @@ class MyApp extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width);
         return Theme(
-          isMaterialAppTheme: true,
           data: ThemeData(
             primaryColor: Color(0xffF5F7FA),
             backgroundColor: Color(0xffFFFFFF),

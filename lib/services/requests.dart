@@ -120,14 +120,16 @@ class Requests {
   static Future<List<Dish>> getDishes() async {
     String path = buildPathForBaseUri([_DISHES]);
 
-    Response response = await _baseDio.get(path);
+    Response response = await _jwtDio.get(path);
 
     if (response.statusCode == HttpStatus.ok) {
       List<Dish> dishes = [];
       List<dynamic> body = response.data;
-      body.forEach((element) {
-        dishes.add(Dish.fromData(element));
-      });
+      body.forEach(
+        (element) {
+          dishes.add(Dish.fromData(element));
+        },
+      );
       return dishes;
     }
     if (response.statusCode == HttpStatus.noContent) {

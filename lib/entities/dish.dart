@@ -77,7 +77,8 @@ class Dish {
 
   factory Dish.fromData(Map<String, dynamic> data) {
     Set<Category> categories = Set<Category>.from(
-        data['categories'].map((number) => Category.values[number]));
+        data['categories']?.map((number) => Category.values[number]) ??
+            {Category.all});
     return Dish(
       categories: categories,
       description: data['description'],
