@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width);
         return Theme(
-          isMaterialAppTheme: true,
           data: ThemeData(
             primaryColor: Color(0xffF5F7FA),
             backgroundColor: Color(0xffFFFFFF),

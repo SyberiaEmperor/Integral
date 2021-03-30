@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integral/resources/app_strings.dart';
 import 'package:integral/services/requests.dart';
 
 class Dish {
@@ -81,7 +82,10 @@ class Dish {
     return Dish(
       categories: categories,
       description: data['description'],
-      url: Requests.BASE_URI + data['picture']['url'],
+      //TODO: refactor
+      url: data['picture']['url'] == null
+          ? AppDefaultUrls.DEFAULT_DISH_URL
+          : Requests.BASE_URI + data['picture']['url'],
       id: data['id'].toString(),
       name: data['name'],
       price: data['price'],
