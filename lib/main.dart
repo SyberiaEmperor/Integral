@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthBloc(
             SpDataRepository(),
             DioAuthenticator(),
-          )..add(AuthFirstCheckEvent()),
+          ),
           child: PhonePage(),
         );
       }),
