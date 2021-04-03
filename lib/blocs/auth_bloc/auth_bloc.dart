@@ -17,7 +17,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(UserDataRepository dataRepository, Authenticator authService)
       : _udr = dataRepository,
         _authService = authService,
-        super(AuthMainState());
+        super(
+          AuthMainState(),
+        ) {
+    add(
+      AuthFirstCheckEvent(),
+    );
+  }
 
   final UserDataRepository _udr;
   final Authenticator _authService;

@@ -5,6 +5,7 @@ import 'package:integral/entities/testing/udr_test.dart';
 import 'package:integral/services/dio_authenticator.dart';
 import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
+import 'package:integral/services/sp_data_rep.dart';
 
 import 'blocs/auth_bloc/auth_bloc.dart';
 
@@ -75,7 +76,7 @@ class MyApp extends StatelessWidget {
         Requests.initReqs();
         return BlocProvider(
           create: (context) => AuthBloc(
-            UDRTest(),
+            SpDataRepository(),
             DioAuthenticator(),
           )..add(AuthFirstCheckEvent()),
           child: PhonePage(),
