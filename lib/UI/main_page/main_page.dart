@@ -38,82 +38,91 @@ class MainPage extends StatelessWidget {
               leading: OrdersPageAppBarLeading(),
               actions: [CartAppBarItem()]),
           backgroundColor: Theme.of(context).backgroundColor,
-          body: BlocBuilder<MainPageBloc, MainPageState>(
+          body: RefreshIndicator(
+            onRefresh: () async {
+              mainBloc.add(
+                Update(),
+              );
+            },
+            child: BlocBuilder<MainPageBloc, MainPageState>(
               builder: (context, state) {
-            if (state is MainPageInitialState) {
-              return Column(
-                children: [
-                  //UpperButtons(),
-                  Expanded(
-                    child: CustomScrollView(
-                      slivers: [
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                            [
-                              MarketTitle(),
-                            ],
-                          ),
-                        ),
-                        SliverAppBar(
-                          elevation: 0.0,
-                          stretch: true,
-                          pinned: true,
-                          centerTitle: true,
-                          collapsedHeight: ResponsiveSize.height(115),
-                          expandedHeight: ResponsiveSize.height(115),
-                          backgroundColor: Theme.of(context).backgroundColor,
-                          flexibleSpace: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Search(
-                                controller: search,
-                                onEditingComplete: () {
-                                  mainBloc.add(SearchEvent(search.text));
-                                },
+                if (state is MainPageInitialState) {
+                  return Column(
+                    children: [
+                      //UpperButtons(),
+                      Expanded(
+                        child: CustomScrollView(
+                          slivers: [
+                            SliverList(
+                              delegate: SliverChildListDelegate(
+                                [
+                                  MarketTitle(),
+                                ],
                               ),
-                              SizedBox(height: ResponsiveSize.height(24)),
-                              Categories(
-                                categories: Category.values,
-                                selectedCategory: context
-                                    .watch<MainPageBloc>()
-                                    .currentCategory,
-                                onSelect: (category) {
-                                  context
-                                      .read<MainPageBloc>()
-                                      .add(ChangeCategoryEvent(category));
-                                },
+                            ),
+                            SliverAppBar(
+                              elevation: 0.0,
+                              stretch: true,
+                              pinned: true,
+                              centerTitle: true,
+                              collapsedHeight: ResponsiveSize.height(115),
+                              expandedHeight: ResponsiveSize.height(115),
+                              backgroundColor:
+                                  Theme.of(context).backgroundColor,
+                              flexibleSpace: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Search(
+                                    controller: search,
+                                    onEditingComplete: () {
+                                      mainBloc.add(SearchEvent(search.text));
+                                    },
+                                  ),
+                                  SizedBox(height: ResponsiveSize.height(24)),
+                                  Categories(
+                                    categories: Category.values,
+                                    selectedCategory: context
+                                        .watch<MainPageBloc>()
+                                        .currentCategory,
+                                    onSelect: (category) {
+                                      context
+                                          .read<MainPageBloc>()
+                                          .add(ChangeCategoryEvent(category));
+                                    },
+                                  ),
+                                  SizedBox(height: ResponsiveSize.height(26)),
+                                ],
                               ),
-                              SizedBox(height: ResponsiveSize.height(26)),
-                            ],
-                          ),
+                            ),
+                            SliverList(
+                              delegate: SliverChildListDelegate(
+                                  dishesCards(state.dishes, context)),
+                            ),
+                          ],
                         ),
-                        SliverList(
-                          delegate: SliverChildListDelegate(
-                              dishesCards(state.dishes, context)),
+                      ),
+                    ],
+                  );
+                }
+                if (state is LoadingState) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(
+                          height: 10,
                         ),
+                        Text('Loading data...')
                       ],
                     ),
-                  ),
-                ],
-              );
-            }
-            if (state is LoadingState) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('Loading data...')
-                  ],
-                ),
-              );
-            }
+                  );
+                }
 
-            return Container();
-          }),
+                return Container();
+              },
+            ),
+          ),
         ),
       ),
     );
@@ -133,17 +142,18 @@ class OrdersPageAppBarLeading extends StatelessWidget {
           );
         },
         child: Container(
-            height: ResponsiveSize.height(40),
-            width: ResponsiveSize.width(30),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).accentColor,
-            ),
-            child: Icon(
-              Icons.description,
-              size: 20,
-              color: Colors.white,
-            )),
+          height: ResponsiveSize.height(40),
+          width: ResponsiveSize.width(30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Theme.of(context).accentColor,
+          ),
+          child: Icon(
+            Icons.description,
+            size: 20,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
