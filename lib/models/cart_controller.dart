@@ -8,5 +8,7 @@ abstract class CartController {
   double get getTotalPrice;
   Map<Dish, int> get dishes;
 
+  void clear();
+
   int get totalCount;
 }

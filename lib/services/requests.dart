@@ -52,7 +52,6 @@ class Requests {
           await _baseDio.post(_TOKEN, data: {'auth': data.toJson()});
       print(response.data);
       if (response.statusCode == HttpStatus.created) {
-        //TODO: Remove _jwt ?
         var jwt = response.data[AppUserStrings.TOKEN];
         initJwt(jwt);
         return User.fromJson(Map<String, String>.from(response.data));
@@ -74,7 +73,6 @@ class Requests {
         },
       );
       if (response.statusCode == HttpStatus.created) {
-        //TODO: Remove _jwt ?
         var _jwt = response.data[AppUserStrings.TOKEN];
         initJwt(_jwt);
         return User.fromJson(response.data);
@@ -136,6 +134,28 @@ class Requests {
       return [];
     } else {
       throw RequestException("Ошибка при запросе");
+    }
+  }
+
+  static Future<FullOrder> deleteOrder(int orderId) async {
+    try {
+      String path = buildPathForBaseUri([
+        _ORDERS,
+        '/',
+        orderId.toString(),
+      ]);
+
+      Response response = await _jwtDio.delete(path);
+
+      if (response.statusCode != HttpStatus.ok) {
+        return FullOrder.fromJson(response.data);
+      } else {
+        throw RequestException('Ошибка во время выполнения запроса');
+      }
+    } on DioError catch (e) {
+      if (e.response.statusCode == HttpStatus.forbidden)
+        throw RequestException("Вы не можете удалить подтверждённый заказ");
+      throw RequestException(e.message);
     }
   }
 

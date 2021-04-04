@@ -4,7 +4,6 @@ import 'package:integral/entities/dish.dart';
 import 'package:integral/models/cart_controller.dart';
 import 'package:integral/models/order_tool.dart';
 import 'package:meta/meta.dart';
-import 'package:pedantic/pedantic.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -38,8 +37,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield InitialCartState(cartController.dishes);
     }
     if (event is PurchaseEvent) {
-      orderTool.makeAnOrder(
-          cartController.dishes, cartController.getTotalPrice);
+      if (await orderTool.makeAnOrder(
+          cartController.dishes, cartController.getTotalPrice)) {
+        cartController.clear();
+        yield ExitState();
+      }
     }
   }
 }

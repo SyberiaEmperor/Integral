@@ -5,8 +5,8 @@ import 'package:integral/services/requests.dart';
 
 class DioOrderTool implements OrderTool {
   @override
-  Future<void> makeAnOrder(Map<Dish, int> dishes, double totalPrice) async {
+  Future<bool> makeAnOrder(Map<Dish, int> dishes, double totalPrice) async {
     var order = OrderToApi.fromCart(dishes, totalPrice);
-    Requests.createOrder(order);
+    return Requests.createOrder(order);
   }
 }

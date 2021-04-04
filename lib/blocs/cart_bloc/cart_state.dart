@@ -14,3 +14,5 @@ class LoadingState extends CartState {
 
   LoadingState(this.caption);
 }
+
+class ExitState extends CartState {}

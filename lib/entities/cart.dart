@@ -54,4 +54,8 @@ class Cart {
     });
     return price;
   }
+
+  void clear() {
+    _dishes.clear();
+  }
 }

@@ -10,129 +10,125 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cartBloc = BlocProvider.of<CartBloc>(context);
 
-    return BlocConsumer<CartBloc, CartState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is InitialCartState) {
-            return Scaffold(
-              backgroundColor: Theme.of(context).backgroundColor,
-              appBar: AppBar(
-                backgroundColor: Theme.of(context).backgroundColor,
-                elevation: 0,
-                leading: BackButtonLeading(),
-              ),
-              body: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Заказ',
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Text(
-                      'Количество позиций: ${cartBloc.cartController.totalCount} ',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Expanded(
-                      child: ListView(
-                        children: state.dishes.entries
-                            .map((pair) => Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: DishTile(
-                                      dish: pair.key,
-                                      count: pair.value,
-                                      inc: () {
-                                        cartBloc.add(IncrementEvent(pair.key));
-                                      },
-                                      dec: () {
-                                        cartBloc.add(DecrementEvent(pair.key));
-                                      }),
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                  ],
+    return BlocConsumer<CartBloc, CartState>(listener: (context, state) {
+      if (state is ExitState) {
+        Navigator.pop(context);
+      }
+    }, builder: (context, state) {
+      if (state is InitialCartState) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).backgroundColor,
+            elevation: 0,
+            leading: BackButtonLeading(),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Заказ',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                 ),
-              ),
-              bottomNavigationBar: Container(
-                height: 75,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(left: 24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Итого:',
-                            style: TextStyle(
-                              color:
-                                  Theme.of(context).textTheme.bodyText2.color,
-                              fontFamily: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2
-                                  .fontFamily,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            cartBloc.cartController.getTotalPrice.toString() +
-                                'руб',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color:
-                                  Theme.of(context).textTheme.bodyText1.color,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        print('<<<Order>>>');
-                        cartBloc.add(PurchaseEvent());
-                      },
-                      child: Container(
-                        width: ResponsiveSize.width(200),
-                        height: ResponsiveSize.width(52),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular((10)),
-                              bottomLeft: Radius.circular((10))),
+                SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  'Количество позиций: ${cartBloc.cartController.totalCount} ',
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                Expanded(
+                  child: ListView(
+                    children: state.dishes.entries
+                        .map((pair) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: DishTile(
+                                  dish: pair.key,
+                                  count: pair.value,
+                                  inc: () {
+                                    cartBloc.add(IncrementEvent(pair.key));
+                                  },
+                                  dec: () {
+                                    cartBloc.add(DecrementEvent(pair.key));
+                                  }),
+                            ))
+                        .toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            height: 75,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(left: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Итого:',
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyText2.color,
+                          fontFamily:
+                              Theme.of(context).textTheme.bodyText2.fontFamily,
+                          fontSize: 16,
                         ),
-                        child: Center(
-                          child: Text(
-                            'Заказать',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.width,
-                            ),
-                          ),
+                      ),
+                      Text(
+                        cartBloc.cartController.getTotalPrice.toString() +
+                            'руб',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).textTheme.bodyText1.color,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    print('<<<Order>>>');
+                    cartBloc.add(PurchaseEvent());
+                  },
+                  child: Container(
+                    width: ResponsiveSize.width(200),
+                    height: ResponsiveSize.width(52),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).accentColor,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular((10)),
+                          bottomLeft: Radius.circular((10))),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Заказать',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.width,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            );
-          }
+              ],
+            ),
+          ),
+        );
+      }
 
-          if (state is LoadingState)
-            return Center(child: CircularProgressIndicator());
+      if (state is LoadingState)
+        return Center(child: CircularProgressIndicator());
 
-          return Scaffold();
-        });
+      return Scaffold();
+    });
   }
 }

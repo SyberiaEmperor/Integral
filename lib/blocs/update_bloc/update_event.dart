@@ -6,3 +6,5 @@ abstract class UpdateEvent {}
 class RunUpdate extends UpdateEvent {
   RunUpdate._();
 }
+
+class LeavePageEvent extends UpdateEvent {}

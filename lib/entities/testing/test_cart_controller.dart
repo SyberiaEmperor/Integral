@@ -41,4 +41,9 @@ class TestCartController implements CartController {
     var total = _cart.totalPrice.toDouble();
     return total;
   }
+
+  @override
+  void clear() {
+    _cart.clear();
+  }
 }
