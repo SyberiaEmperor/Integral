@@ -62,5 +62,8 @@ class UpdateBloc<DataType> extends Bloc<UpdateEvent, UpdateState> {
       var data = await updater.update();
       yield UpdateMainState(data);
     }
+    if (event is LeavePageEvent) {
+      yield LeavePage();
+    }
   }
 }

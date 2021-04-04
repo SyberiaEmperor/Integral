@@ -137,7 +137,7 @@ class Requests {
     }
   }
 
-  static Future<FullOrder> deleteOrder(int orderId) async {
+  static Future<bool> deleteOrder(int orderId) async {
     try {
       String path = buildPathForBaseUri([
         _ORDERS,
@@ -147,8 +147,8 @@ class Requests {
 
       Response response = await _jwtDio.delete(path);
 
-      if (response.statusCode != HttpStatus.ok) {
-        return FullOrder.fromJson(response.data);
+      if (response.statusCode == HttpStatus.ok) {
+        return true;
       } else {
         throw RequestException('Ошибка во время выполнения запроса');
       }

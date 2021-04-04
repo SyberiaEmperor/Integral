@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/auth/phone_page.dart';
 import 'package:integral/services/dio_authenticator.dart';
+import 'package:integral/services/injector.dart';
 import 'package:integral/services/requests.dart';
 import 'package:integral/services/responsive_size.dart';
 import 'package:integral/services/sp_data_rep.dart';
@@ -11,8 +12,14 @@ import 'blocs/auth_bloc/auth_bloc.dart';
 // Requests.createUser(AuthData(login: '89999999999', password: '1234'));
 void main() {
   runApp(MyApp());
+  Singletone();
   Requests.initReqs();
 }
+
+// class Kostyl{
+//   VoidCallback update;
+//   Kostyl
+// }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
