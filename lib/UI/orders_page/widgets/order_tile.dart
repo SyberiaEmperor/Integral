@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:integral/UI/routes/order_observe_route.dart';
 import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -12,7 +13,10 @@ class OrderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, OrderObserveRoute(microOrder.id));
+        Navigator.push(
+          context,
+          OrderObserveRoute(microOrder.id),
+        );
       },
       child: Container(
         height: ResponsiveSize.height(60),
@@ -30,6 +34,7 @@ class OrderTile extends StatelessWidget {
               ),
               child: CircleAvatar(
                 radius: ResponsiveSize.height(25),
+                child: Icon(Icons.restaurant),
               ),
             ),
             Expanded(
@@ -51,10 +56,7 @@ class OrderTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text(
-                    'Какой-то текст',
-                    style: Theme.of(context).accentTextTheme.bodyText1,
-                  ),
+                  StatusTile(confirmed: microOrder.confirmed),
                 ],
               ),
             ),
@@ -64,6 +66,23 @@ class OrderTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class StatusTile extends StatelessWidget {
+  final Color color;
+  final String text;
+
+  const StatusTile({Key key, @required bool confirmed})
+      : color = confirmed ? Colors.green : Colors.red,
+        text = confirmed ? 'Оплачен' : 'Не оплачен',
+        super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(color: color),
     );
   }
 }
