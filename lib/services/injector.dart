@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
-
 class Singletone {
-  VoidCallback update;
+  void Function() update;
   static Singletone _instanse;
 
   factory Singletone() {
