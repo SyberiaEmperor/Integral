@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
         Requests.initReqs();
         return BlocProvider(
           create: (context) => AuthBloc(
-            UDRTest(), //SpDataRepository(),
+            SpDataRepository(),
             DioAuthenticator(),
           ),
           child: PhonePage(),

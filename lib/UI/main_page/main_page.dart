@@ -8,11 +8,13 @@ import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 
 import 'package:integral/UI/routes/orders_page_route.dart';
+import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 
 import 'package:integral/entities/dish.dart';
 
 import 'package:integral/services/responsive_size.dart';
+import 'package:integral/services/sp_data_rep.dart';
 
 class MainPage extends StatelessWidget {
   final TextEditingController search = TextEditingController();
@@ -28,98 +30,112 @@ class MainPage extends StatelessWidget {
     return SafeArea(
       child: GestureDetector(
         onTap: () => unfocus(context),
-        child: Scaffold(
-          appBar: AppBar(
+        child: Stack(
+          children: [
+            Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).backgroundColor,
+                elevation: 0.0,
+                leading: OrdersPageAppBarLeading(),
+                actions: [
+                  CartAppBarItem(),
+                ],
+              ),
               backgroundColor: Theme.of(context).backgroundColor,
-              elevation: 0.0,
-              leading: OrdersPageAppBarLeading(),
-              actions: [CartAppBarItem()]),
-          backgroundColor: Theme.of(context).backgroundColor,
-          body: RefreshIndicator(
-            onRefresh: () async {
-              mainBloc.add(
-                Update(),
-              );
-            },
-            child: BlocBuilder<MainPageBloc, MainPageState>(
-              builder: (context, state) {
-                if (state is MainPageInitialState) {
-                  return Column(
-                    children: [
-                      //UpperButtons(),
-                      Expanded(
-                        child: CustomScrollView(
-                          slivers: [
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                [
-                                  MarketTitle(),
-                                ],
-                              ),
-                            ),
-                            SliverAppBar(
-                              elevation: 0.0,
-                              stretch: true,
-                              pinned: true,
-                              centerTitle: true,
-                              collapsedHeight: ResponsiveSize.height(115),
-                              expandedHeight: ResponsiveSize.height(115),
-                              backgroundColor:
-                                  Theme.of(context).backgroundColor,
-                              flexibleSpace: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Search(
-                                    controller: search,
-                                    onEditingComplete: () {
-                                      mainBloc.add(SearchEvent(search.text));
-                                    },
+              body: RefreshIndicator(
+                onRefresh: () async {
+                  mainBloc.add(
+                    Update(),
+                  );
+                },
+                child: BlocBuilder<MainPageBloc, MainPageState>(
+                  builder: (context, state) {
+                    if (state is MainPageInitialState) {
+                      return Column(
+                        children: [
+                          //UpperButtons(),
+                          Expanded(
+                            child: CustomScrollView(
+                              slivers: [
+                                SliverList(
+                                  delegate: SliverChildListDelegate(
+                                    [
+                                      MarketTitle(),
+                                    ],
                                   ),
-                                  SizedBox(height: ResponsiveSize.height(24)),
-                                  Categories(
-                                    categories: Category.values,
-                                    selectedCategory: context
-                                        .watch<MainPageBloc>()
-                                        .currentCategory,
-                                    onSelect: (category) {
-                                      context
-                                          .read<MainPageBloc>()
-                                          .add(ChangeCategoryEvent(category));
-                                    },
+                                ),
+                                SliverAppBar(
+                                  elevation: 0.0,
+                                  stretch: true,
+                                  pinned: true,
+                                  centerTitle: true,
+                                  collapsedHeight: ResponsiveSize.height(115),
+                                  expandedHeight: ResponsiveSize.height(115),
+                                  backgroundColor:
+                                      Theme.of(context).backgroundColor,
+                                  flexibleSpace: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Search(
+                                        controller: search,
+                                        onEditingComplete: () {
+                                          mainBloc
+                                              .add(SearchEvent(search.text));
+                                        },
+                                      ),
+                                      SizedBox(
+                                          height: ResponsiveSize.height(24)),
+                                      Categories(
+                                        categories: Category.values,
+                                        selectedCategory: context
+                                            .watch<MainPageBloc>()
+                                            .currentCategory,
+                                        onSelect: (category) {
+                                          context.read<MainPageBloc>().add(
+                                              ChangeCategoryEvent(category));
+                                        },
+                                      ),
+                                      SizedBox(
+                                          height: ResponsiveSize.height(26)),
+                                    ],
                                   ),
-                                  SizedBox(height: ResponsiveSize.height(26)),
-                                ],
-                              ),
+                                ),
+                                SliverList(
+                                  delegate: SliverChildListDelegate(
+                                      dishesCards(state.dishes, context)),
+                                ),
+                              ],
                             ),
-                            SliverList(
-                              delegate: SliverChildListDelegate(
-                                  dishesCards(state.dishes, context)),
+                          ),
+                        ],
+                      );
+                    }
+                    if (state is LoadingState) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(),
+                            SizedBox(
+                              height: 10,
                             ),
+                            Text('Loading data...')
                           ],
                         ),
-                      ),
-                    ],
-                  );
-                }
-                if (state is LoadingState) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text('Loading data...')
-                      ],
-                    ),
-                  );
-                }
-
-                return Container();
-              },
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: ExitButton(
+                deleter: SpDataRepository(),
+              ),
+            ),
+          ],
         ),
       ),
     );

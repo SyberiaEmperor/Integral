@@ -26,17 +26,18 @@ class CartAppBarItem extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => page));
         },
         child: Container(
-            height: ResponsiveSize.height(40),
-            width: ResponsiveSize.width(35),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).accentColor,
-            ),
-            child: Icon(
-              Icons.shopping_cart,
-              size: 20,
-              color: Colors.white,
-            )),
+          height: ResponsiveSize.height(40),
+          width: ResponsiveSize.width(35),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Theme.of(context).accentColor,
+          ),
+          child: Icon(
+            Icons.shopping_cart,
+            size: 20,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

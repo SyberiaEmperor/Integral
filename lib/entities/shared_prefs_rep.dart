@@ -14,4 +14,10 @@ class SharedPreferencessRepository extends UserDataRepository {
     print('Unimplemented!');
     return null;
   }
+
+  @override
+  Future<void> deleteData() {
+    print('Unimplemented!');
+    return null;
+  }
 }

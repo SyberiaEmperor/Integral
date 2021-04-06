@@ -16,4 +16,10 @@ class UDRTest implements UserDataRepository {
     await Future.delayed(Duration(seconds: 1));
     data = data;
   }
+
+  @override
+  Future<void> deleteData() async {
+    print('Deleting data');
+    await Future.delayed(Duration(seconds: 1));
+  }
 }

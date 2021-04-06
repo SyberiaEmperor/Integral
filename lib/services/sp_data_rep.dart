@@ -23,4 +23,10 @@ class SpDataRepository implements UserDataRepository {
     await prefs.setString(_login, data.login);
     await prefs.setString(_password, data.password);
   }
+
+  @override
+  Future<void> deleteData() async {
+    var prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 }

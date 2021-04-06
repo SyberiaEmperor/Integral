@@ -4,4 +4,5 @@ import 'package:integral/entities/auth_data.dart';
 abstract class UserDataRepository {
   Future<AuthData> getData();
   Future<void> setData(AuthData data);
+  Future<void> deleteData();
 }
