@@ -6,12 +6,12 @@ import 'package:integral/UI/main_page/widgets/dish_tile.dart';
 import 'package:integral/UI/main_page/widgets/market_title.dart';
 import 'package:integral/UI/main_page/widgets/search.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
-import 'package:integral/UI/orders_page/orders_page.dart';
+
 import 'package:integral/UI/routes/orders_page_route.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
-import 'package:integral/entities/api/order_from_api.dart';
+
 import 'package:integral/entities/dish.dart';
-import 'package:integral/services/requests.dart';
+
 import 'package:integral/services/responsive_size.dart';
 
 class MainPage extends StatelessWidget {
