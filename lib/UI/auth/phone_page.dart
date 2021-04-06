@@ -21,15 +21,19 @@ class PhonePage extends StatelessWidget {
         listener: (context, state) {
           if (state is AuthLoggedInState) {
             Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                          create: (context) => MainPageBloc(
-                            cartController: DataRepository.cartController,
-                            dishController: TestDishController(),
-                          )..add(Update()),
-                          child: MainPage(),
-                        )));
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => MainPageBloc(
+                    cartController: DataRepository.cartController,
+                    dishController: TestDishController(),
+                  )..add(
+                      Update(),
+                    ),
+                  child: MainPage(),
+                ),
+              ),
+            );
           }
         },
         child: Column(
@@ -39,7 +43,7 @@ class PhonePage extends StatelessWidget {
             PhoneInputField(
               controller: phone,
             ),
-            FlatButton(
+            TextButton(
               onPressed: () {
                 authBloc.add(AuthAskPasswordEvent(phone.text));
                 Navigator.push(

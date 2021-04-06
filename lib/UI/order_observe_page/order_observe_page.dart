@@ -67,7 +67,7 @@ class OrderObservePage extends StatelessWidget {
           BottomButton(
             text: 'Оплатить',
             color: Colors.green,
-            action: () => print("Оплата!"),
+            action: () => print("Оплатить заказ"),
           ),
           BottomButton(
             text: 'Отменить заказ',
