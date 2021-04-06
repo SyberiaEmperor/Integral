@@ -54,11 +54,16 @@ class Requests {
       if (response.statusCode == HttpStatus.created) {
         var jwt = response.data[AppUserStrings.TOKEN];
         initJwt(jwt);
-        return User.fromJson(Map<String, String>.from(response.data));
+        return _getUser();
       }
     } on DioError catch (error) {
       throw AuthException(error.message);
     }
+  }
+
+  static Future<User> _getUser() async {
+    Response response = await _jwtDio.get(_USER);
+    return User.fromJson(Map<String, dynamic>.from(response.data));
   }
 
   static Future<User> createUser(AuthData data) async {
@@ -72,11 +77,7 @@ class Requests {
           },
         },
       );
-      if (response.statusCode == HttpStatus.created) {
-        var _jwt = response.data[AppUserStrings.TOKEN];
-        initJwt(_jwt);
-        return User.fromJson(response.data);
-      }
+      return logIn(data);
     } on DioError catch (error) {
       throw AuthException(error.message);
     }

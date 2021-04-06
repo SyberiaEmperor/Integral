@@ -18,8 +18,8 @@ class User {
     return TestUser();
   }
 
-  factory User.fromJson(Map<String, String> data) {
-    String id = data[AppUserStrings.ID] ?? '';
+  factory User.fromJson(Map<String, dynamic> data) {
+    String id = data[AppUserStrings.ID]?.toString() ?? '';
     String phone = data[AppUserStrings.PHONE] ?? '';
     String token = data[AppUserStrings.TOKEN];
     return User(id: id, phone: phone, token: token);

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/UI/auth/phone_page.dart';
+import 'package:integral/entities/testing/udr_test.dart';
+import 'package:integral/models/user_data_repository.dart';
 import 'package:integral/services/dio_authenticator.dart';
 import 'package:integral/services/injector.dart';
 import 'package:integral/services/requests.dart';
@@ -82,7 +84,7 @@ class MyApp extends StatelessWidget {
         Requests.initReqs();
         return BlocProvider(
           create: (context) => AuthBloc(
-            SpDataRepository(),
+            UDRTest(), //SpDataRepository(),
             DioAuthenticator(),
           ),
           child: PhonePage(),

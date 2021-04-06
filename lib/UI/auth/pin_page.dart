@@ -43,7 +43,7 @@ class PinPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Pin4SymInputField(controller),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     BlocProvider.of<AuthBloc>(context).add(AuthSignInEvent(
                         login: phone, password: controller.pin));

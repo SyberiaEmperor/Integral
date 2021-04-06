@@ -38,6 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (data != null) {
         yield await auth(
           data,
+          _authService.logIn,
         );
       }
     }
@@ -45,12 +46,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       //TODO: В КЛИЕНТЕ НЕТ РАЗДЕЛЕНИЯ МЕЖДУ РЕГИСТРАЦИЕЙ И АВТОРИЗАЦИЕЙ
       yield await auth(
         event.data,
+        _authService.signIn,
+        signIn: true,
       );
     }
     if (event is AuthSignInEvent) {
       yield await auth(
         event.data,
-        signIn: true,
+        _authService.logIn,
       );
     }
     if (event is AuthAskPasswordEvent) {
@@ -60,20 +63,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<AuthState> auth(
-    AuthData data, {
+    AuthData data,
+    Future<User> Function(AuthData) authMethod, {
     bool signIn = false,
   }) async {
     try {
-      var authMethod = _authService.logIn;
       User user = await authMethod(data);
-      //TODO: Not tne best place for this. Need to be changed.
       DataRepository.init(user: user);
-
       UserRepository.setUser(user);
       _udr.setData(data);
       return AuthLoggedInState();
     } on AuthException catch (exception) {
-      return AuthErrorState(exception.message);
+      if (signIn) {
+        return AuthErrorState(exception.message);
+      } else {
+        return auth(data, _authService.signIn, signIn: true);
+      }
     } on Exception {
       rethrow;
     }
