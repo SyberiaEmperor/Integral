@@ -68,7 +68,7 @@ class Requests {
 
   static Future<User> createUser(AuthData data) async {
     try {
-      Response response = await _baseDio.post(
+      await _baseDio.post(
         _USER,
         data: {
           'user': {
