@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_multi_formatter/formatters/masked_input_formatter.dart';
 
 import 'package:integral/services/responsive_size.dart';
@@ -11,7 +12,8 @@ class PhoneInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var maskPhone = MaskedInputFormatter('(###)###-##-##');
+    var maskPhone = MaskedInputFormatter('(###)###-##-##',
+        anyCharMatcher: RegExp(r'[0-9]'));
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -23,12 +25,16 @@ class PhoneInputField extends StatelessWidget {
           primaryColor: Color(0xddFA7022),
         ),
         child: TextFormField(
+          keyboardType: TextInputType.number,
           controller: controller,
           style: Theme.of(context)
               .accentTextTheme
               .bodyText2
               .copyWith(fontSize: 20),
-          inputFormatters: [maskPhone],
+          inputFormatters: [
+            //FilteringTextInputFormatter.digitsOnly,
+            maskPhone,
+          ],
           decoration: InputDecoration(
             prefix: Text(
               '+7',

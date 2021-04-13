@@ -4,7 +4,7 @@ import 'package:integral/services/responsive_size.dart';
 class AuthTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircleAvatar(
@@ -17,7 +17,10 @@ class AuthTitle extends StatelessWidget {
           padding: EdgeInsets.all(ResponsiveSize.height(20)),
           child: Text(
             'Введите номер телефона:',
-            style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 22),
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(fontSize: 22.height),
           ),
         ),
       ],
