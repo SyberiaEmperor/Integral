@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integral/UI/order_observe_page/order_observe_page.dart';
 import 'package:integral/UI/widget/count_field.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -21,34 +22,27 @@ class DishTile extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          actions: [
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: Colors.red[200],
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Удалить блюдо из корзины?"),
+              BottomButton(
+                text: "Да",
+                color: Colors.green,
+                action: () {
+                  Navigator.pop(context, true);
+                },
               ),
-              onPressed: () {
-                Navigator.pop(context, false);
-              },
-              child: Text(
-                "No",
-                style: TextStyle(color: Colors.black),
+              BottomButton(
+                text: "Нет",
+                color: Colors.red,
+                action: () {
+                  Navigator.pop(context, false);
+                },
               ),
-            ),
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                textStyle: TextStyle(color: Colors.black),
-                backgroundColor: Colors.green[200],
-              ),
-              onPressed: () {
-                Navigator.pop(context, true);
-              },
-              child: Text(
-                "Yes",
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ],
-          content: Text("Удалить блюдо из корзины?"),
+            ],
+          ),
         );
       },
     );
