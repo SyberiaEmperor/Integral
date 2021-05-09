@@ -23,16 +23,29 @@ class DishTile extends StatelessWidget {
         return AlertDialog(
           actions: [
             OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.red[200],
+              ),
               onPressed: () {
                 Navigator.pop(context, false);
               },
-              child: Text("No"),
+              child: Text(
+                "No",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                textStyle: TextStyle(color: Colors.black),
+                backgroundColor: Colors.green[200],
+              ),
               onPressed: () {
                 Navigator.pop(context, true);
               },
-              child: Text("Yes"),
+              child: Text(
+                "Yes",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ],
           content: Text("Удалить блюдо из корзины?"),
