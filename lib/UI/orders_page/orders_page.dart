@@ -12,16 +12,14 @@ class OrdersPage extends StatelessWidget {
       : super(key: key) {
     Singletone().update = update;
   }
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        elevation: 0.0,
-        leading: BackButtonLeading(),
-      ),
-      body: SingleChildScrollView(
+
+  Widget body() {
+    if (microOrders.isEmpty)
+      return const Center(
+        child: Text("У Вас пока что нет заказов."),
+      );
+    else {
+      return SingleChildScrollView(
         child: Column(
           children: List<Widget>.from(
             microOrders.map(
@@ -29,7 +27,23 @@ class OrdersPage extends StatelessWidget {
             ),
           ),
         ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          title: Text("Меню заказов"),
+          backgroundColor: Theme.of(context).backgroundColor,
+          elevation: 0.0,
+          leading: BackButtonLeading(),
+        ),
+        body: body(),
       ),
-    ));
+    );
   }
 }
