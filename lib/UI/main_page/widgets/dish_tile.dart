@@ -7,6 +7,8 @@ import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../resources/app_strings.dart';
+
 class DishTile extends StatelessWidget {
   final Dish dish;
   final VoidCallback onAdd;
@@ -103,7 +105,19 @@ class DishTile extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: GestureDetector(
-                      onTap: onAdd,
+                      onTap: () {
+                        onAdd;
+                        var messenger = ScaffoldMessenger.of(context);
+                        messenger.removeCurrentSnackBar();
+                        messenger.showSnackBar(
+                          SnackBar(
+                            backgroundColor:
+                                Theme.of(context).accentColor.withOpacity(0.8),
+                            duration: Duration(milliseconds: 500),
+                            content: Text(UIStrings.ADDED),
+                          ),
+                        );
+                      },
                       child: Container(
                         width: ResponsiveSize.width(56),
                         height: ResponsiveSize.height(40),
@@ -137,16 +151,19 @@ List<Widget> dishesCards(List<Dish> dishes, BuildContext context) {
   List<Widget> items = [];
 
   for (var dish in dishes) {
-    items.add(Padding(
-      padding: EdgeInsets.only(
-        //right: ResponsiveSize.width(17.58),
-        left: ResponsiveSize.width(20),
-      ),
-      child: DishTile(
+    items.add(
+      Padding(
+        padding: EdgeInsets.only(
+          left: ResponsiveSize.width(20),
+        ),
+        child: DishTile(
           dish: dish,
-          onAdd: () =>
-              context.read<MainPageBloc>().add(AddDishToCartEvent(dish))),
-    ));
+          onAdd: () => context.read<MainPageBloc>().add(
+                AddDishToCartEvent(dish),
+              ),
+        ),
+      ),
+    );
     items.add(SizedBox(height: 10));
   }
 

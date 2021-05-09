@@ -35,7 +35,9 @@ class MyApp extends StatelessWidget {
             primaryColor: Color(0xffF5F7FA),
             backgroundColor: Color(0xffFFFFFF),
             accentColor: Color(0xffFA7022),
-            cursorColor: Color(0xff435D6B),
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: Color(0xff435D6B),
+            ),
             textTheme: TextTheme(
               bodyText1: TextStyle(
                 fontFamily: 'Poppins',

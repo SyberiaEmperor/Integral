@@ -36,3 +36,9 @@ class AppDefaultUrls {
   static const DEFAULT_DISH_URL =
       'https://i.pinimg.com/originals/8a/eb/d8/8aebd875fbddd22bf3971c3a7159bdc7.png';
 }
+
+class UIStrings {
+  UIStrings._();
+
+  static const ADDED = 'Блюдо добавлено!';
+}
