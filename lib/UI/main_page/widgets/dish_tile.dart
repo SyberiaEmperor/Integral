@@ -106,7 +106,7 @@ class DishTile extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     child: GestureDetector(
                       onTap: () {
-                        onAdd;
+                        onAdd();
                         var messenger = ScaffoldMessenger.of(context);
                         messenger.removeCurrentSnackBar();
                         messenger.showSnackBar(
@@ -158,9 +158,9 @@ List<Widget> dishesCards(List<Dish> dishes, BuildContext context) {
         ),
         child: DishTile(
           dish: dish,
-          onAdd: () => context.read<MainPageBloc>().add(
-                AddDishToCartEvent(dish),
-              ),
+          onAdd: () {
+            context.read<MainPageBloc>().add(AddDishToCartEvent(dish));
+          },
         ),
       ),
     );
