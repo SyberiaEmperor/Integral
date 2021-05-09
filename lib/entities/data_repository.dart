@@ -17,4 +17,9 @@ class DataRepository {
     _user = user;
     _cartController = TestCartController(user.cart);
   }
+
+  static void exit() {
+    _user = null;
+    _cartController = null;
+  }
 }

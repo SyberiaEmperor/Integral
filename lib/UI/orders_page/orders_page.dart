@@ -4,6 +4,8 @@ import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/entities/api/order_from_api.dart';
 import 'package:integral/services/injector.dart';
 
+import '../../resources/app_strings.dart';
+
 class OrdersPage extends StatelessWidget {
   final List<OrderFromApi> microOrders;
   final VoidCallback update;
@@ -16,7 +18,7 @@ class OrdersPage extends StatelessWidget {
   Widget body() {
     if (microOrders.isEmpty)
       return const Center(
-        child: Text("У Вас пока что нет заказов."),
+        child: Text(UIStrings.NO_ORDERS),
       );
     else {
       return SingleChildScrollView(

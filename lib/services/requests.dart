@@ -89,15 +89,24 @@ class Requests {
   }
 
   static Future<List<OrderFromApi>> getAllOrders() async {
-    Response response = await _jwtDio.get(_ORDERS);
-    if (response.statusCode == HttpStatus.ok) {
-      List<OrderFromApi> orders = (response.data as List<dynamic>)
-          .map((data) => OrderFromApi.fromJson(data))
-          .toList();
-      print(orders);
-      return orders;
+    try {
+      Response response = await _jwtDio.get(_ORDERS);
+      if (response.statusCode == HttpStatus.ok) {
+        List<OrderFromApi> orders = (response.data as List<dynamic>)
+            .map((data) => OrderFromApi.fromJson(data))
+            .toList();
+        print(orders);
+        return orders;
+      }
+      if (response.statusCode == HttpStatus.noContent) {
+        return [];
+      }
+      throw RequestException("Ошибка во время получения заказов");
+    } on DioError catch (e) {
+      throw RequestException(e.message);
+    } on Exception {
+      rethrow;
     }
-    throw RequestException("Ошибка во время получения заказов");
   }
 
   static Future<FullOrder> getOrderById(int id) async {

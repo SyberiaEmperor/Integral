@@ -41,4 +41,5 @@ class UIStrings {
   UIStrings._();
 
   static const ADDED = 'Блюдо добавлено!';
+  static const NO_ORDERS = 'У Вас пока что нет заказов.';
 }

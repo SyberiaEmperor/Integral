@@ -7,6 +7,8 @@ import 'package:integral/services/dio_authenticator.dart';
 import 'package:integral/services/responsive_size.dart';
 import 'package:integral/services/sp_data_rep.dart';
 
+import '../../entities/data_repository.dart';
+
 class BackButtonLeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class ExitButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {
           await deleter.deleteData();
+          DataRepository.exit();
           //TODO:УЖАСНО! Вынести в отдельный роут!
           Navigator.pushReplacement(
             context,
