@@ -6,17 +6,53 @@ import 'package:integral/services/responsive_size.dart';
 class DishTile extends StatelessWidget {
   final Dish dish;
   final int count;
-  final void Function() inc;
-  final void Function() dec;
+  final VoidCallback inc;
+  final VoidCallback dec;
 
-  const DishTile(
-      {@required this.dish,
-      @required this.count,
-      @required this.inc,
-      @required this.dec});
+  const DishTile({
+    @required this.dish,
+    @required this.count,
+    @required this.inc,
+    @required this.dec,
+  });
+
+  Future<bool> askForDeleting(BuildContext context) async {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          actions: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: Text("No"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: Text("Yes"),
+            ),
+          ],
+          content: Text("Удалить блюдо из корзины?"),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    Future<void> decrement() async {
+      bool shouldDelete = true;
+      if (count == 1) {
+        shouldDelete = await askForDeleting(context);
+      }
+      if (shouldDelete) {
+        dec();
+      }
+    }
+
     return Align(
       child: GestureDetector(
         onTap: () {
@@ -58,7 +94,7 @@ class DishTile extends StatelessWidget {
                 child: CountField.vertical(
                   count: count,
                   inc: inc,
-                  dec: dec,
+                  dec: decrement,
                   color: Theme.of(context).backgroundColor,
                 ),
               ),
