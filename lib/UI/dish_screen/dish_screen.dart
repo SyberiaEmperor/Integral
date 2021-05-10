@@ -80,11 +80,14 @@ class DishScreen extends StatelessWidget {
       bottomNavigationBar: BlocBuilder(
         cubit: bloc,
         builder: (context, state) {
-          return _ButtonBar(
-            leftFieldCallback: _decrement,
-            rightFieldCallback: _increment,
-            addToCartCallback: _increment,
-            count: (state as DishPageMainState).count,
+          return Padding(
+            padding: EdgeInsets.only(bottom: 15.height),
+            child: _ButtonBar(
+              leftFieldCallback: _decrement,
+              rightFieldCallback: _increment,
+              addToCartCallback: _increment,
+              count: (state as DishPageMainState).count,
+            ),
           );
         },
       ),

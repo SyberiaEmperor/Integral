@@ -20,7 +20,7 @@ class TagField extends StatelessWidget {
         style: Theme.of(context)
             .accentTextTheme
             .subtitle1
-            .copyWith(fontSize: 10.height),
+            .copyWith(fontSize: 9.height),
         textWidthBasis: TextWidthBasis.parent,
       ),
     );
