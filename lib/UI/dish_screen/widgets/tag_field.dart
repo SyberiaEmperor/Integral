@@ -9,8 +9,8 @@ class TagField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 25,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+      height: 25.height,
+      padding: EdgeInsets.symmetric(horizontal: 18.width, vertical: 6.height),
       decoration: BoxDecoration(
         color: Theme.of(context).accentColor,
         borderRadius: BorderRadius.circular(40),
@@ -20,7 +20,7 @@ class TagField extends StatelessWidget {
         style: Theme.of(context)
             .accentTextTheme
             .subtitle1
-            .copyWith(fontSize: 12.height),
+            .copyWith(fontSize: 10.height),
         textWidthBasis: TextWidthBasis.parent,
       ),
     );

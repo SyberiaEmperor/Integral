@@ -44,7 +44,9 @@ class ExitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
+        left: 16.0,
         top: 8.0,
+        bottom: 8.0,
       ),
       child: GestureDetector(
         onTap: () async {
@@ -73,7 +75,7 @@ class ExitButton extends StatelessWidget {
           ),
           child: Icon(
             Icons.exit_to_app,
-            size: 20,
+            size: 20.height,
             color: Colors.white,
           ),
         ),
