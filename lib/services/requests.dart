@@ -7,6 +7,7 @@ import 'package:integral/entities/auth_data.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/entities/user.dart';
 import 'package:integral/resources/app_strings.dart';
+import 'package:integral/resources/exception_captions.dart';
 import 'package:integral/utils/exceptions/auth_exceptions.dart';
 
 class Requests {
@@ -103,7 +104,7 @@ class Requests {
       }
       throw RequestException("Ошибка во время получения заказов");
     } on DioError catch (e) {
-      throw RequestException(e.message);
+      throw RequestException(DioExceptionCaption.BAD_INTERNET);
     } on Exception {
       rethrow;
     }
@@ -143,7 +144,7 @@ class Requests {
     if (response.statusCode == HttpStatus.noContent) {
       return [];
     } else {
-      throw RequestException("Ошибка при запросе");
+      throw RequestException(DioExceptionCaption.BAD_INTERNET);
     }
   }
 
@@ -160,12 +161,12 @@ class Requests {
       if (response.statusCode == HttpStatus.ok) {
         return true;
       } else {
-        throw RequestException('Ошибка во время выполнения запроса');
+        throw RequestException(DioExceptionCaption.BAD_INTERNET);
       }
     } on DioError catch (e) {
       if (e.response.statusCode == HttpStatus.forbidden)
         throw RequestException("Вы не можете удалить подтверждённый заказ");
-      throw RequestException(e.message);
+      throw RequestException(DioExceptionCaption.BAD_INTERNET);
     }
   }
 
