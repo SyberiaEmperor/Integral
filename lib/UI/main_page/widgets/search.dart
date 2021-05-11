@@ -23,17 +23,19 @@ class Search extends StatelessWidget {
         controller: controller,
         onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 15),
+          contentPadding: EdgeInsets.only(left: 10),
           alignLabelWithHint: true,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(ResponsiveSize.height(5))),
-          enabledBorder: InputBorder.none,
+            gapPadding: 0,
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(
+              ResponsiveSize.height(5),
+            ),
+          ),
           prefixIcon: Container(
             margin: EdgeInsets.only(
                 right: ResponsiveSize.width(15),
                 left: ResponsiveSize.width(11)),
-            width: ResponsiveSize.width(20),
-            height: ResponsiveSize.height(20),
             child: Icon(
               Icons.search,
               color: Theme.of(context).textSelectionTheme.cursorColor,
