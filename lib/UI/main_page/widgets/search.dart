@@ -14,14 +14,16 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          right: ResponsiveSize.width(15), left: ResponsiveSize.width(15)),
+        right: ResponsiveSize.width(15),
+        left: ResponsiveSize.width(15),
+      ),
       width: ResponsiveSize.width(345),
       height: ResponsiveSize.height(45),
       child: TextField(
         controller: controller,
         onEditingComplete: onEditingComplete,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(bottom: 1, top: 3),
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
           alignLabelWithHint: true,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(ResponsiveSize.height(5))),
@@ -34,7 +36,7 @@ class Search extends StatelessWidget {
             height: ResponsiveSize.height(20),
             child: Icon(
               Icons.search,
-              color: Theme.of(context).cursorColor,
+              color: Theme.of(context).textSelectionTheme.cursorColor,
             ),
           ),
           hintText: 'Поиск',
