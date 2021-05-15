@@ -36,8 +36,14 @@ class MainPage extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Theme.of(context).backgroundColor,
                 elevation: 0.0,
-                leading: OrdersPageAppBarLeading(),
+                leading: ExitButton(
+                  deleter: SpDataRepository(),
+                ),
                 actions: [
+                  OrdersPageAppBarLeading(),
+                  SizedBox(
+                    width: 20,
+                  ),
                   CartAppBarItem(),
                 ],
               ),
@@ -129,12 +135,12 @@ class MainPage extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
+            /*Align(
               alignment: Alignment.topCenter,
               child: ExitButton(
                 deleter: SpDataRepository(),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

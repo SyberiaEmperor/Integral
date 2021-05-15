@@ -40,11 +40,12 @@ class Cart {
   }
 
   int get totalCount {
-    int result = 0;
+    return _dishes.length;
+    /*int result = 0;
     for (int count in _dishes.values) {
       result += count;
     }
-    return result;
+    return result;*/
   }
 
   int get totalPrice {
