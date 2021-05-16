@@ -15,6 +15,7 @@ class CartScreen extends StatelessWidget {
 
     return BlocConsumer<CartBloc, CartState>(listener: (context, state) {
       if (state is ExitState) {
+        counterBloc.add(cartCounter.Update());
         Navigator.pop(context);
       }
     }, builder: (context, state) {
