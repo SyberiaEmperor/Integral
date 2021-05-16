@@ -7,6 +7,8 @@ import 'package:integral/blocs/auth_bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/data_repository.dart';
+import 'package:integral/blocs/cart_counter_bloc/cart_counter_bloc.dart'
+    as cartCounter;
 import 'package:integral/entities/testing/test_dish_controller.dart';
 
 class PinPage extends StatelessWidget {
@@ -26,15 +28,22 @@ class PinPage extends StatelessWidget {
           if (state is AuthLoggedInState) {
             Navigator.popUntil(context, (route) => false);
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                          create: (context) => MainPageBloc(
-                            cartController: DataRepository.cartController,
-                            dishController: TestDishController(),
-                          )..add(Update()),
-                          child: MainPage(),
-                        )));
+              context,
+              MaterialPageRoute(
+                builder: (context) => MultiBlocProvider(providers: [
+                  BlocProvider(
+                      create: (context) => cartCounter.CartCounterBloc()),
+                  BlocProvider(
+                    create: (context) => MainPageBloc(
+                      cartController: DataRepository.cartController,
+                      dishController: TestDishController(),
+                    )..add(
+                        Update(),
+                      ),
+                  ),
+                ], child: MainPage()),
+              ),
+            );
           }
         },
         builder: (context, state) {

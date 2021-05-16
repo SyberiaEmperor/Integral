@@ -5,6 +5,8 @@ import 'package:integral/UI/auth/widgets/auth_title.dart';
 import 'package:integral/UI/auth/widgets/phone_input_field.dart';
 import 'package:integral/UI/main_page/main_page.dart';
 import 'package:integral/blocs/auth_bloc/auth_bloc.dart';
+import 'package:integral/blocs/cart_counter_bloc/cart_counter_bloc.dart'
+    as cartCounter;
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/data_repository.dart';
 import 'package:integral/entities/testing/test_dish_controller.dart';
@@ -23,15 +25,18 @@ class PhonePage extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => BlocProvider(
-                  create: (context) => MainPageBloc(
-                    cartController: DataRepository.cartController,
-                    dishController: TestDishController(),
-                  )..add(
-                      Update(),
-                    ),
-                  child: MainPage(),
-                ),
+                builder: (context) => MultiBlocProvider(providers: [
+                  BlocProvider(
+                      create: (context) => cartCounter.CartCounterBloc()),
+                  BlocProvider(
+                    create: (context) => MainPageBloc(
+                      cartController: DataRepository.cartController,
+                      dishController: TestDishController(),
+                    )..add(
+                        Update(),
+                      ),
+                  ),
+                ], child: MainPage()),
               ),
             );
           }

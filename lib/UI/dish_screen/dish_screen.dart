@@ -5,6 +5,8 @@ import 'package:integral/UI/dish_screen/widgets/tag_field.dart';
 import 'package:integral/UI/main_page/widgets/upper_buttons.dart';
 import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/UI/widget/count_field.dart';
+import 'package:integral/blocs/cart_counter_bloc/cart_counter_bloc.dart'
+    as cartCounter;
 import 'package:integral/blocs/dish_page/dish_page_bloc.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
@@ -15,13 +17,16 @@ class DishScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var bloc = BlocProvider.of<DishPageBloc>(context);
+    var counterBloc = BlocProvider.of<cartCounter.CartCounterBloc>(context);
 
     void _decrement() {
       bloc.add(DecrementEvent());
+      counterBloc.add(cartCounter.Update());
     }
 
     void _increment() {
       bloc.add(IncrementEvent());
+      counterBloc.add(cartCounter.Update());
     }
 
     return Scaffold(

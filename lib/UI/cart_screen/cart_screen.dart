@@ -4,11 +4,14 @@ import 'package:integral/UI/cart_screen/widgets/dish_tile.dart';
 import 'package:integral/UI/widget/back_button.dart';
 import 'package:integral/blocs/cart_bloc/cart_bloc.dart';
 import 'package:integral/services/responsive_size.dart';
+import 'package:integral/blocs/cart_counter_bloc/cart_counter_bloc.dart'
+    as cartCounter;
 
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cartBloc = BlocProvider.of<CartBloc>(context);
+    var counterBloc = BlocProvider.of<cartCounter.CartCounterBloc>(context);
 
     return BlocConsumer<CartBloc, CartState>(listener: (context, state) {
       if (state is ExitState) {
@@ -52,9 +55,11 @@ class CartScreen extends StatelessWidget {
                                   count: pair.value,
                                   inc: () {
                                     cartBloc.add(IncrementEvent(pair.key));
+                                    counterBloc.add(cartCounter.Update());
                                   },
                                   dec: () {
                                     cartBloc.add(DecrementEvent(pair.key));
+                                    counterBloc.add(cartCounter.Update());
                                   }),
                             ))
                         .toList(),

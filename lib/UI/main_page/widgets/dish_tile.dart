@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:integral/UI/dish_screen/dish_screen.dart';
+import 'package:integral/blocs/cart_counter_bloc/cart_counter_bloc.dart';
 import 'package:integral/blocs/dish_page/dish_page_bloc.dart';
 import 'package:integral/blocs/main_page/mainpage_bloc.dart';
 import 'package:integral/entities/dish.dart';
 import 'package:integral/services/responsive_size.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:integral/blocs/cart_counter_bloc/cart_counter_bloc.dart'
+    as cartCounter;
 
 import '../../../resources/app_strings.dart';
 
@@ -26,14 +29,19 @@ class DishTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => BlocProvider(
-                create: (_) => DishPageBloc(
-                    cartController:
-                        BlocProvider.of<MainPageBloc>(context).cartController,
-                    dish: dish),
-                child: DishScreen(),
-              ),
-            ),
+                builder: (_) => MultiBlocProvider(providers: [
+                      BlocProvider.value(
+                          value: BlocProvider.of<MainPageBloc>(context)),
+                      BlocProvider.value(
+                          value: BlocProvider.of<CartCounterBloc>(context)),
+                      BlocProvider(
+                        create: (_) => DishPageBloc(
+                            cartController:
+                                BlocProvider.of<MainPageBloc>(context)
+                                    .cartController,
+                            dish: dish),
+                      ),
+                    ], child: DishScreen())),
           );
         },
         child: Container(
@@ -160,6 +168,7 @@ List<Widget> dishesCards(List<Dish> dishes, BuildContext context) {
           dish: dish,
           onAdd: () {
             context.read<MainPageBloc>().add(AddDishToCartEvent(dish));
+            context.read<CartCounterBloc>().add(cartCounter.Update());
           },
         ),
       ),
